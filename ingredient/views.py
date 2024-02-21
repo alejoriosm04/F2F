@@ -2,6 +2,19 @@ from django.shortcuts import render
 
 from django.shortcuts import render, redirect
 from .models import Ingredient
+from .forms import RecipeForm
+
+def index(request):
+    if request.method == "POST":
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            print(cd)
+            # TODO: Add the timestamp to the database.
+            return redirect("/")
+    else:
+        form = RecipeForm()
+    return render(request, "home.html", {"form": form})
 
 # Create your views here.
 def list_ingredients(request):
@@ -27,4 +40,3 @@ def delete_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(id=ingredient_id)
     ingredient.delete()
     return redirect("/ingredients/")
-

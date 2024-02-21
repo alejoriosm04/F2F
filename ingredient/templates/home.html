@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+  <h1>FridgeToFeast</h1>
+  <p>Generate recipes with AI.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" class="btn btn-primary" value="Generate recipe">
+  </form>
+</div>
+{% endblock %}
