@@ -41,11 +41,11 @@ def create_ingredient(request):
         # Si la solicitud es GET, puedes decidir qué hacer aquí. Por ejemplo, mostrar un formulario vacío o redirigir.
         # Para este ejemplo, redirigiremos al usuario a la lista de ingredientes.
         return redirect("/kitchen/")
-    
+
 def view_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(id=ingredient_id)
     return render(request, "view_ingredient.html", {"ingredient": ingredient})
-    
+
 def edit_ingredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, id=ingredient_id)
     if request.method == "POST":
