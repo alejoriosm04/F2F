@@ -125,6 +125,8 @@
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
+                <form action="{% url 'edit_ingredient' ingredient.id %}" method="GET">
+                    <button type="submit" class="btn btn-warning btn-sm">Edit</button>
             </div>
             {% endfor %}
         </div>
