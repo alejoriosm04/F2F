@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <div class="text-5xl my-36 text-center">
+        <span class="font-extrabold">Edit Ingredient</span>
+    </div>
+
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg p-6">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="text-gray-600 text-xs italic">{{ field.help_text }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="bg-indigo-500 text-white font-bold py-2 px-4 rounded hover:bg-indigo-600 transition duration-300 ease-in-out">
+                Save Changes
+            </button>
+        </form>
+    </div>
+</div>
+<br/><br/>
+{% endblock content %}

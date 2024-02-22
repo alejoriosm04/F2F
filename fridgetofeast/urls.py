@@ -17,12 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from ingredient import views as ingredientViews
+from kitchen import views as ingredientViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ingredientViews.index),
-    path('ingredients/', ingredientViews.list_ingredients, name='list_ingredients'),
-    path('ingredients/create/', ingredientViews.create_ingredient, name='create_ingredient'),
-    path('ingredients/delete/<int:ingredient_id>/', ingredientViews.delete_ingredient, name='delete_ingredient'),
+    path('kitchen/', ingredientViews.list_ingredients, name='list_ingredients'),
+    path('kitchen/create/', ingredientViews.create_ingredient, name='create_ingredient'),
+    path('kitchen/view/<int:ingredient_id>/', ingredientViews.view_ingredient, name='view_ingredient'),
+    path('kitchen/edit/<int:ingredient_id>/', ingredientViews.edit_ingredient, name='edit_ingredient'),
+    path('kitchen/delete/<int:ingredient_id>/', ingredientViews.delete_ingredient, name='delete_ingredient'),
 ]

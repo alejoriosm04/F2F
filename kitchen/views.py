@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 from django.shortcuts import render, redirect
 from .models import Ingredient
-from .forms import RecipeForm
+from .forms import RecipeForm, IngredientForm
+from django.shortcuts import render, redirect, get_object_or_404
 
 def index(request):
     if request.method == "POST":
@@ -34,14 +35,28 @@ def create_ingredient(request):
             )
         ingredient = Ingredient(name=new_name, quantity=new_quantity, unit=new_unit)
         ingredient.save()
-        return redirect("/ingredients/")
+        return redirect("/kitchen/")
     else:
         # Si la solicitud es GET, puedes decidir qué hacer aquí. Por ejemplo, mostrar un formulario vacío o redirigir.
         # Para este ejemplo, redirigiremos al usuario a la lista de ingredientes.
-        return redirect("/ingredients/")
-
+        return redirect("/kitchen/")
+    
+def view_ingredient(request, ingredient_id):
+    ingredient = Ingredient.objects.get(id=ingredient_id)
+    return render(request, "view_ingredient.html", {"ingredient": ingredient})
+    
+def edit_ingredient(request, ingredient_id):
+    ingredient = get_object_or_404(Ingredient, id=ingredient_id)
+    if request.method == "POST":
+        form = IngredientForm(request.POST, instance=ingredient)
+        if form.is_valid():
+            form.save()
+            return redirect("/kitchen/view/" + str(ingredient.id) + "/")
+    else:
+        form = IngredientForm(instance=ingredient)
+    return render(request, "edit_ingredient.html", {"form": form, "ingredient": ingredient})
 
 def delete_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(id=ingredient_id)
     ingredient.delete()
-    return redirect("/ingredients/")
+    return redirect("/kitchen/")
