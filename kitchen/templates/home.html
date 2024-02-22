@@ -8,7 +8,33 @@
   <form method="post">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" class="btn btn-primary" value="Generate recipe">
+    <input id="generate-recipe-btn" type="submit" class="btn btn-primary" value="Generate recipe">
   </form>
+  <!-- CARD SECTION -->
+  <div id="card-section" class="card card-body">
+    <h2 class="text-center">Ingredients List</h2>
+    {% if ingredients %}
+    <div class="list-group">
+      {% for ingredient in ingredients %}
+      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="mb-1">{{ ingredient.name }}</h5>
+          <small>Quantity: {{ ingredient.quantity }} - Unit: {{ ingredient.unit }}</small>
+        </div>
+        <form action="{% url 'delete_ingredient' ingredient.id %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+        <form action="{% url 'view_ingredient' ingredient.id %}" method="GET">
+          <button type="submit" class="btn btn-warning btn-sm">View</button>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-muted">No ingredients added yet.</p>
+    {% endif %}
+  </div>
+  <!-- CARD SECTION -->
 </div>
+
 {% endblock %}

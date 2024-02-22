@@ -12,10 +12,10 @@
     <div class="max-w-4xl mx-auto bg-white rounded-xl overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl">
       <!-- Placeholder for Ingredient Image (Consider adding an 'image_url' field in your model) -->
       <img class="w-full h-64 object-cover rounded-t-xl" src="{% static 'path/to/default/image.png' %}" alt="Ingredient Image">
-      
+
       <div class="p-6">
         <h3 class="font-bold text-2xl mb-2">Ingredient Details</h3>
-        
+
         <!-- Detailed Information -->
         <div class="grid grid-cols-2 gap-4">
           <div><strong>Name:</strong> {{ ingredient.name }}</div>
@@ -28,7 +28,7 @@
             {% csrf_token %}
             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
         </form>
-        
+
         <form action="{% url 'edit_ingredient' ingredient.id %}" method="GET">
             <button type="submit" class="btn btn-warning btn-sm">Edit</button>
 
@@ -37,7 +37,7 @@
           <!-- Placeholder for a potential action (Consider adding relevant fields or actions) -->
           <a href="#" class="bg-indigo-500 text-white font-bold py-2 px-4 rounded hover:bg-indigo-700 transition duration-300 ease-in-out">
             Placeholder Action
-          </a>        
+          </a>
         </div>
       </div>
     </div>

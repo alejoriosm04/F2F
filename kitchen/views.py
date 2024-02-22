@@ -10,9 +10,10 @@ def index(request):
         form = RecipeForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            print(cd)
+            ingredients = Ingredient.objects.filter(name__contains=cd['details'])
+            print(ingredients)
             # TODO: Add the timestamp to the database.
-            return redirect("/")
+            return render(request, "home.html", {"form": form, "ingredients": ingredients})
     else:
         form = RecipeForm()
     return render(request, "home.html", {"form": form})
