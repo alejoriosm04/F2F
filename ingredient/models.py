@@ -5,4 +5,4 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=100)
     quantity = models.FloatField()
     unit = models.IntegerField()
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
