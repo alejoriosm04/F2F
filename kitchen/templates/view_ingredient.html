@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container mx-auto mt-10">
+    <!-- Ingredient Detail Section -->
+    <div class="text-5xl my-10 text-center">
+      <span class="font-extrabold">{{ ingredient.name }}</span>
+    </div>
+
+    <!-- Ingredient Detail Card -->
+    <div class="max-w-4xl mx-auto bg-white rounded-xl overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl">
+      <!-- Placeholder for Ingredient Image (Consider adding an 'image_url' field in your model) -->
+      <img class="w-full h-64 object-cover rounded-t-xl" src="{% static 'path/to/default/image.png' %}" alt="Ingredient Image">
+      
+      <div class="p-6">
+        <h3 class="font-bold text-2xl mb-2">Ingredient Details</h3>
+        
+        <!-- Detailed Information -->
+        <div class="grid grid-cols-2 gap-4">
+          <div><strong>Name:</strong> {{ ingredient.name }}</div>
+          <div><strong>Quantity:</strong> {{ ingredient.quantity }}</div>
+          <div><strong>Unit:</strong> {{ ingredient.get_unit_display }}</div>
+          <div><strong>Added on:</strong> {{ ingredient.created_at|date:"F d, Y" }}</div>
+        </div>
+
+        <form action="{% url 'delete_ingredient' ingredient.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+        
+        <form action="{% url 'edit_ingredient' ingredient.id %}" method="GET">
+            <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+
+        <!-- Placeholder for any additional information or actions -->
+        <div class="mt-6 flex justify-around">
+          <!-- Placeholder for a potential action (Consider adding relevant fields or actions) -->
+          <a href="#" class="bg-indigo-500 text-white font-bold py-2 px-4 rounded hover:bg-indigo-700 transition duration-300 ease-in-out">
+            Placeholder Action
+          </a>        
+        </div>
+      </div>
+    </div>
+  </div>
+<br/><br/>
+{% endblock content%}

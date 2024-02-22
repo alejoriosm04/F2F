@@ -24,6 +24,7 @@ urlpatterns = [
     path('', ingredientViews.index),
     path('kitchen/', ingredientViews.list_ingredients, name='list_ingredients'),
     path('kitchen/create/', ingredientViews.create_ingredient, name='create_ingredient'),
+    path('kitchen/view/<int:ingredient_id>/', ingredientViews.view_ingredient, name='view_ingredient'),
     path('kitchen/edit/<int:ingredient_id>/', ingredientViews.edit_ingredient, name='edit_ingredient'),
     path('kitchen/delete/<int:ingredient_id>/', ingredientViews.delete_ingredient, name='delete_ingredient'),
 ]

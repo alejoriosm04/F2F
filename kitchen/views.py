@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 from django.shortcuts import render, redirect
 from .models import Ingredient
-from .forms import RecipeForm
+from .forms import RecipeForm, IngredientForm
+from django.shortcuts import render, redirect, get_object_or_404
 
 def index(request):
     if request.method == "POST":
@@ -40,25 +41,20 @@ def create_ingredient(request):
         # Para este ejemplo, redirigiremos al usuario a la lista de ingredientes.
         return redirect("/kitchen/")
     
-def edit_ingredient(request, ingredient_id):
+def view_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(id=ingredient_id)
+    return render(request, "view_ingredient.html", {"ingredient": ingredient})
+    
+def edit_ingredient(request, ingredient_id):
+    ingredient = get_object_or_404(Ingredient, id=ingredient_id)
     if request.method == "POST":
-        new_name = request.POST.get("name")
-        new_quantity = request.POST.get("quantity")
-        new_unit = request.POST.get("unit")
-        if new_name == "" or new_quantity == "":
-            ingredients = Ingredient.objects.all()
-            return render(
-                request, "list_ingredients.html", {"ingredients": ingredients, "error": "Title and description is required"}
-            )
-        ingredient.name = new_name
-        ingredient.quantity = new_quantity
-        ingredient.unit = new_unit
-        ingredient.save()
-        return redirect("/kitchen/")
+        form = IngredientForm(request.POST, instance=ingredient)
+        if form.is_valid():
+            form.save()
+            return redirect("/kitchen/view/" + str(ingredient.id) + "/")
     else:
-        return render(request, "edit_ingredient.html", {"ingredient": ingredient})
-
+        form = IngredientForm(instance=ingredient)
+    return render(request, "edit_ingredient.html", {"form": form, "ingredient": ingredient})
 
 def delete_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(id=ingredient_id)
