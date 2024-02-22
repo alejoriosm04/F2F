@@ -23,17 +23,22 @@ def list_ingredients(request):
 
 
 def create_ingredient(request):
-    new_name = request.POST["name"]
-    new_quantity = request.POST["quantity"]
-    new_unit = request.POST["unit"]
-    if new_name == "" or new_quantity == "":
-        ingredients = Ingredient.objects.all()
-        return render(
-            request, "list_ingredients.html", {"ingredients": ingredients, "error": "Title and description is required"}
-        )
-    ingredient = Ingredient(name=new_name, quantity=new_quantity, unit=new_unit)
-    ingredient.save()
-    return redirect("/ingredients/")
+    if request.method == "POST":
+        new_name = request.POST.get("name")
+        new_quantity = request.POST.get("quantity")
+        new_unit = request.POST.get("unit")
+        if new_name == "" or new_quantity == "":
+            ingredients = Ingredient.objects.all()
+            return render(
+                request, "list_ingredients.html", {"ingredients": ingredients, "error": "Title and description is required"}
+            )
+        ingredient = Ingredient(name=new_name, quantity=new_quantity, unit=new_unit)
+        ingredient.save()
+        return redirect("/ingredients/")
+    else:
+        # Si la solicitud es GET, puedes decidir qué hacer aquí. Por ejemplo, mostrar un formulario vacío o redirigir.
+        # Para este ejemplo, redirigiremos al usuario a la lista de ingredientes.
+        return redirect("/ingredients/")
 
 
 def delete_ingredient(request, ingredient_id):

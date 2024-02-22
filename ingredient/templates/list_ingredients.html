@@ -1,4 +1,4 @@
-{% load static %}
+<!-- {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,11 +17,11 @@
   </head>
   <body class="bg-dark">
     <div class="col-md-4 offset-md-4">
-      {{error}}
+      {{error}} -->
 
       <!-- Create Form -->
-      <form
-        action="{% url 'create_task' %}"
+      <!-- <form
+        action="{% url 'create_ingredient' %}"
         method="POST"
         class="card card-body mb-2"
       >
@@ -45,10 +45,10 @@
           placeholder="I have to do..."
         ></textarea>
         <button class="btn btn-primary">save</button>
-      </form>
+      </form> -->
 
       <!-- List Tasks -->
-      {% for task in tasks %}
+      <!-- {% for task in tasks %}
       <div class="list-group">
         <div
           class="card card-body bg-secondary text-light d-flex flex-row justify-content-between mb-2"
@@ -57,15 +57,85 @@
             <h3 class="h6">{{task.title}}</h3>
             <p>{{task.description}}</p>
           </div>
-          <form action="{% url 'delete_task' task.id %}" method="POST">
+          <form action="{% url 'delete_ingredient' task.id %}" method="POST">
             {% csrf_token %}
             <button class="btn btn-danger">Delete</button>
           </form>
         </div>
       </div>
       {% empty %}
-      <h1 class="text-light">No tasks yet</h1>
+      <h1 class="text-light">No ingredients yet</h1>
       {% endfor %}
     </div>
   </body>
+</html> -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ingredient Management</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+</head>
+<body class="bg-dark">
+<div class="col-md-6 offset-md-3">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
+    <!-- Create Ingredient Form -->
+    <div class="card card-body mb-3">
+        <h2 class="text-center">Add New Ingredient</h2>
+        <form action="{% url 'create_ingredient' %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Ingredient name" required>
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity" required>
+            </div>
+            <div class="mb-3">
+                <label for="unit" class="form-label">Unit:</label>
+                <select class="form-control" id="unit" name="unit">
+                    <option value="1">pcs</option>
+                    <option value="2">lbs</option>
+                    <!-- Add more units as needed -->
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Ingredient</button>
+        </form>
+    </div>
+
+    <!-- List Ingredients -->
+    <div class="card card-body">
+        <h2 class="text-center">Ingredients List</h2>
+        {% if ingredients %}
+        <div class="list-group">
+            {% for ingredient in ingredients %}
+            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-1">{{ ingredient.name }}</h5>
+                    <small>Quantity: {{ ingredient.quantity }} - Unit: {{ ingredient.get_unit_display }}</small>
+                </div>
+                <form action="{% url 'delete_ingredient' ingredient.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-muted">No ingredients added yet.</p>
+        {% endif %}
+    </div>
+</div>
+</body>
 </html>

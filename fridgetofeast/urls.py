@@ -22,4 +22,7 @@ from ingredient import views as ingredientViews
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ingredientViews.index),
+    path('ingredients/', ingredientViews.list_ingredients, name='list_ingredients'),
+    path('ingredients/create/', ingredientViews.create_ingredient, name='create_ingredient'),
+    path('ingredients/delete/<int:ingredient_id>/', ingredientViews.delete_ingredient, name='delete_ingredient'),
 ]
