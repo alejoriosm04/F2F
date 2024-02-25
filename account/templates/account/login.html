@@ -3,6 +3,7 @@
 {% block title %}Log-in{% endblock title %}
 
 {% block content %}
+<div class="mx-auto p-2" style="width: 400px;">
 <h1>Log-in</h1>
 <p>Please, use the following form to log-in:</p>
 <form method="post">
@@ -10,4 +11,5 @@
   {% csrf_token %}
   <p><input type="submit" value="Log in"></p>
 </form>
+</div>
 {% endblock content %}
