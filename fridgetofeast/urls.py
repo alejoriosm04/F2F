@@ -21,7 +21,7 @@ from kitchen import views as ingredientViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', ingredientViews.index),
+    path('', ingredientViews.index, name='home'),
     path('kitchen/', ingredientViews.list_ingredients, name='list_ingredients'),
     path('kitchen/create/', ingredientViews.create_ingredient, name='create_ingredient'),
     path('kitchen/view/<int:ingredient_id>/', ingredientViews.view_ingredient, name='view_ingredient'),
