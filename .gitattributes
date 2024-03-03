@@ -1,0 +1,19 @@
+# .gitattributes
+# For more information, read:
+# https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
+
+# Default setting.
+* text=auto
+
+# Convert line endings to LF.
+*.py text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+
+# Don't treat binary files as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.svg binary
+*.sqlite3 binary
