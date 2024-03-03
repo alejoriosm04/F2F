@@ -19,5 +19,14 @@
     <input type="hidden" name="next" value="{{ next }}" />
     <p><input type="submit" value="Log in"></p>
   </form>
+  {% if not debug %}
+  <div>
+    Use these <i>(temporary)</i> credentials:
+    <ul>
+      <li><b>Username:</b> admin</li>
+      <li><b>Password:</b> admin</li>
+    </ul>
+  </div>
+  {% endif %}
 </div>
 {% endblock content %}

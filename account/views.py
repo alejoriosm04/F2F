@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
+from fridgetofeast.settings import DEBUG
 
 
 def user_login(request):
@@ -23,7 +24,7 @@ def user_login(request):
         return HttpResponse('Invalid login.')
   else:
     form = LoginForm()
-  return render(request, 'account/login.html', {'form': form})
+  return render(request, 'account/login.html', {'form': form, 'debug': DEBUG})
 
 @login_required
 def dashboard(request):
