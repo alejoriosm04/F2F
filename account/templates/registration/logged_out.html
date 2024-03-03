@@ -3,11 +3,13 @@
 {% block title %}Logged out{% endblock %}
 
 {% block content %}
-<h1>Logged out</h1>
-<p>
-  You have been successfully logged out.
-  You can <a href="{% url 'login' %}">log-in again</a>.
-</p>
+<div class="container">
+  <h1>Logged out</h1>
+  <p>
+    You have been successfully logged out.
+    You can <a href="{% url 'login' %}">log-in again</a>.
+  </p>
 
-<a href="{% url 'home' %}">Home</a>
+  <a href="{% url 'home' %}">Home</a>
+</div>
 {% endblock %}

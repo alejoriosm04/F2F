@@ -12,15 +12,25 @@
 
 <body>
   <div id="header">
-    {% if request.user.is_authenticated %}
-    <form method="post" action="{% url 'logout' %}">
-      {% csrf_token %}
-      <button type="submit">Logout</button>
-    </form>
-    {% else %}
-    <a href="{% url 'login' %}">Login</a>
-    {% endif %}
+    <nav class="navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">FridgeToFeast</a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            {% if request.user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
+            </form>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-info btn-sm">Login</a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
+
   <div id="content">
     {% block content %}
     {% endblock %}
