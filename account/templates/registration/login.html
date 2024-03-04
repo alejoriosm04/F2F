@@ -10,8 +10,6 @@
     Your username and password didn't match.
     Please try again.
   </p>
-  {% else %}
-  <p>Please, use the following form to log-in:</p>
   {% endif %}
   <form action="{% url 'login' %}" method="post">
     <div class="mb-3">
