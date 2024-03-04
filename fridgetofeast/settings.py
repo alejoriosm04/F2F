@@ -36,7 +36,7 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'account.apps.AccountConfig',
+    'user.apps.UserConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -142,5 +142,5 @@ LOGOUT_URL = 'logout'
 # Custom authentication backends.
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
+    'user.authentication.EmailAuthBackend',
 ]
