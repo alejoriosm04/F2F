@@ -23,7 +23,7 @@ def index(request):
 # Create your views here.
 @login_required
 def list_ingredients(request):
-    ingredients = Ingredient.objects.all()
+    ingredients = Ingredient.objects.filter(user=request.user)
     return render(request, "list_ingredients.html", {"ingredients": ingredients})
 
 @login_required
@@ -37,7 +37,7 @@ def create_ingredient(request):
             return render(
                 request, "list_ingredients.html", {"ingredients": ingredients, "error": "Title and description is required"}
             )
-        ingredient = Ingredient(name=new_name, quantity=new_quantity, unit=new_unit)
+        ingredient = Ingredient(name=new_name, quantity=new_quantity, unit=new_unit, user=request.user)
         ingredient.save()
         return redirect("/kitchen/")
     else:
