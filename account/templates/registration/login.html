@@ -14,7 +14,16 @@
   <p>Please, use the following form to log-in:</p>
   {% endif %}
   <form action="{% url 'login' %}" method="post">
-    {{ form.as_p }}
+    <div class="mb-3">
+      <label for="id_username" class="form-label">Email address</label>
+      <input type="email" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username"
+        class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="id_password" class="form-label">Password</label>
+      <input type="password" name="password" autocomplete="current-password" required id="id_password"
+        class="form-control">
+    </div>
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}" />
     <p><input type="submit" class="btn btn-primary" value="Log in"></p>
@@ -23,7 +32,7 @@
   <div>
     Use these <i>(temporary)</i> credentials:
     <ul>
-      <li><b>Username:</b> admin</li>
+      <li><b>Email address:</b> admin@example.org</li>
       <li><b>Password:</b> admin</li>
     </ul>
   </div>
