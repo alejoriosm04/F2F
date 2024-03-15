@@ -16,9 +16,12 @@
 <button id="generate-recipe-btn" class="btn btn-success">Generate Recipe</button>
 
 
+<!-- Contenedor para mostrar el título de la receta generada -->
+<h2 id="recipe-title" class="mt-3">Recipe Title Will Go Here</h2> <!-- Agregado -->
+
 <!-- Contenedor para mostrar la receta generada -->
 <div id="recipe-output" class="mt-3">
-  <!-- La receta se mostrará aquí -->
+  <!-- Los pasos de la receta se mostrarán aquí -->
 </div>
 
 <!-- CARD SECTION -->
@@ -51,7 +54,6 @@
 
 {% block scripts %}
 <script type="text/javascript">
-    // Esta variable ahora se define dentro del bloque 'scripts' para asegurar su correcta carga
     var generateRecipeUrl = "{% url 'recipe:generate_recipe_view' %}";
 </script>
 <script src="{% static 'recipe/recipe_generator.js' %}" defer></script>

@@ -19,7 +19,6 @@ def index(request):
         form = RecipeForm()
     return render(request, "home.html", {"form": form})
 
-# Create your views here.
 @login_required
 def list_ingredients(request):
     ingredients = Ingredient.objects.filter(user=request.user)
@@ -40,8 +39,6 @@ def create_ingredient(request):
         ingredient.save()
         return redirect("/kitchen/")
     else:
-        # Si la solicitud es GET, puedes decidir qué hacer aquí. Por ejemplo, mostrar un formulario vacío o redirigir.
-        # Para este ejemplo, redirigiremos al usuario a la lista de ingredientes.
         return redirect("/kitchen/")
 
 @login_required
