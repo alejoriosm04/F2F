@@ -10,11 +10,12 @@ async function generateRecipe() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        const titleOutput = document.getElementById('recipe-title');
         const recipeOutput = document.getElementById('recipe-output');
+        titleOutput.textContent = data.title; 
         recipeOutput.innerHTML = data.recipe;
     } catch (error) {
         console.error('Error fetching recipe:', error.message);
-        // Aquí podrías actualizar la UI para informar al usuario del error
     }
 }
 
