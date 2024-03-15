@@ -28,4 +28,6 @@ urlpatterns = [
     path('kitchen/edit/<int:ingredient_id>/', ingredientViews.edit_ingredient, name='edit_ingredient'),
     path('kitchen/delete/<int:ingredient_id>/', ingredientViews.delete_ingredient, name='delete_ingredient'),
     path('user/', include('user.urls')),
+    # path('recipe/', include(('recipe.urls', 'recipe'), namespace='recipe')),
+    path('recipe/', include('recipe.urls')),
 ]
