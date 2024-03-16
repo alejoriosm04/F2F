@@ -14,6 +14,8 @@
 
 3. Install dependencies with `pip install -r requirements.txt`
 
-4. Run `python manage.py runserver`
+4. Set your OpenAI API key as an environment variable `OPENAI_API_KEY`. You can do this by creating a `.env` file in the root directory of the project with the line `OPENAI_API_KEY=your_api_key_here`, replacing `your_api_key_here` with your actual API key.
 
-5. Access `localhost:8000` from a modern web browser.
+5. Run `python manage.py runserver`
+
+6. Access `localhost:8000` from a modern web browser.
