@@ -30,4 +30,5 @@ urlpatterns = [
     path('user/', include('user.urls')),
     # path('recipe/', include(('recipe.urls', 'recipe'), namespace='recipe')),
     path('recipe/', include('recipe.urls')),
+    path('kitchen/statistics/', include('statistic.urls')),
 ]

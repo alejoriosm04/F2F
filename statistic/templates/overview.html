@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Cumulative Ingredients Over Time</h2>
+  <div style="max-width: 100%; overflow-x: auto;">
+    <img src="data:image/png;base64,{{ image_base64 }}" alt="Cumulative Ingredients Over Time" style="max-width: 100%; height: auto;">
+  </div>
+{% endblock %}
