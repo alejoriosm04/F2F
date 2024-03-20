@@ -5,55 +5,52 @@ from kitchen.models import Ingredient
 from .models import Recipe
 import os
 
-@login_required
-def generate_recipe_view(request):
-    if request.method == "GET":
-        user = request.user
-        user_ingredients = list(Ingredient.objects.filter(user=user).values_list('name', flat=True))
+def generate_recipe(user, preference):
+    user_ingredients = list(Ingredient.objects.filter(user=user).values_list('name', flat=True))
 
-        if not user_ingredients:
-            return JsonResponse({"error": "No ingredients found for the user."}, status=404)
+    if not user_ingredients:
+        return JsonResponse({"error": "No ingredients found for the user."}, status=404)
 
-        ingredients_string = ', '.join(user_ingredients)
-        adapter = OpenAIAdapter()
+    user_ingredients = ', '.join(user_ingredients)
+    adapter = OpenAIAdapter()
+
+    try:
+        recipe_data = adapter.generate_response_sync(user_ingredients, preference)
+
+        if not recipe_data:
+            # Si la API no devolvió datos, regresa un error
+            return JsonResponse({"error": "The OpenAI API did not generate a recipe."}, status=500)
 
         try:
-            recipe_data = adapter.generate_response_sync(ingredients_string)
+            # Intenta extraer el título y la receta según el formato esperado
+            parts = recipe_data.split('Recipe:')
+            if len(parts) < 2 or not parts[0] or not parts[1]:
+                raise ValueError("Incomplete recipe format.")
 
-            if not recipe_data:
-                # Si la API no devolvió datos, regresa un error
-                return JsonResponse({"error": "The OpenAI API did not generate a recipe."}, status=500)
+            title = parts[0].replace('Title:', '').strip()
+            recipe = parts[1].strip()
 
-            try:
-                # Intenta extraer el título y la receta según el formato esperado
-                parts = recipe_data.split('Recipe:')
-                if len(parts) < 2 or not parts[0] or not parts[1]:
-                    raise ValueError("Incomplete recipe format.")
+            if not title or not recipe:
+                raise ValueError("Incomplete recipe format.")
 
-                title = parts[0].replace('Title:', '').strip()
-                recipe = parts[1].strip()
+            # Si todo es correcto, guarda la receta en la base de datos
+            new_recipe = Recipe(
+                user=user,
+                title=title,
+                description=recipe,
+                parameters=user_ingredients,
+            )
+            new_recipe.save()
 
-                if not title or not recipe:
-                    raise ValueError("Incomplete recipe format.")
+            return JsonResponse({
+                "title": title,
+                "recipe": recipe
+            })
 
-                # Si todo es correcto, guarda la receta en la base de datos
-                new_recipe = Recipe(
-                    user=user,
-                    title=title,
-                    description=recipe,
-                    parameters=ingredients_string,
-                )
-                new_recipe.save()
+        except ValueError as e:
+            # Maneja el error de formato en la respuesta
+            return JsonResponse({"error": str(e)}, status=500)
 
-                return JsonResponse({
-                    "title": title,
-                    "recipe": recipe
-                })
-
-            except ValueError as e:
-                # Maneja el error de formato en la respuesta
-                return JsonResponse({"error": str(e)}, status=500)
-
-        except Exception as e:
-            print(e)
-            return JsonResponse({"error": "An error occurred while fetching the recipe."}, status=500)
+    except Exception as e:
+        print(e)
+        return JsonResponse({"error": "An error occurred while fetching the recipe."}, status=500)

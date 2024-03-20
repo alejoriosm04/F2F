@@ -7,12 +7,13 @@ from django.conf import settings
 class OpenAIAdapter:
     client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
 
-    def generate_response_sync(self,ingredients_string: str):
+    def generate_response_sync(self,ingredients_string: str, preference):
         instruction = (
             "Create a recipe title and a recipe using the following ingredients: "
             "{ingredients}. Start the response with 'Title: ', followed by the recipe title. "
             "After the title, add the recipe steps starting with 'Recipe: '."
-        ).format(ingredients=ingredients_string)
+            "As for preferences, I want the recipe to have: {preference}"
+        ).format(ingredients=ingredients_string, preference=preference)
 
         return asyncio.run(self._generate_response(instruction))
 

@@ -6,15 +6,18 @@ from .forms import RecipeForm, IngredientForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
+from recipe.views import generate_recipe
+
 @login_required
 def index(request):
     if request.method == "POST":
         form = RecipeForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            ingredients = Ingredient.objects.filter(name__contains=cd['details'])
+            user = request.user
+            response = generate_recipe(user, cd['preference'])
             # TODO: Add the timestamp to the database.
-            return render(request, "home.html", {"form": form, "ingredients": ingredients})
+            return response
     else:
         form = RecipeForm()
     return render(request, "home.html", {"form": form})

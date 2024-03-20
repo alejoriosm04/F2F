@@ -9,12 +9,8 @@
 <form method="post">
   {% csrf_token %}
   {{ form }}
-  <input type="submit" class="btn btn-primary" value="Filter">
+  <input type="submit" class="btn btn-primary" value="Generate recipe">
 </form>
-
-<!-- Botón para generar receta -->
-<button id="generate-recipe-btn" class="btn btn-success">Generate Recipe</button>
-
 
 <!-- Contenedor para mostrar el título de la receta generada -->
 <h2 id="recipe-title" class="mt-3">Recipe Title Will Go Here</h2> <!-- Agregado -->
@@ -53,8 +49,4 @@
 
 
 {% block scripts %}
-<script type="text/javascript">
-    var generateRecipeUrl = "{% url 'recipe:generate_recipe_view' %}";
-</script>
-<script src="{% static 'recipe/recipe_generator.js' %}" defer></script>
 {% endblock %}
