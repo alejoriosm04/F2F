@@ -19,6 +19,7 @@
 </ol>
 <!-- Since we are just using around 100 tokens, the response might get cut off. -->
 <p class="fs-1">…</p>
-<button class="btn btn-primary " href="{% url 'home' %}">Generate another recipe</button>
+<!-- To generate another recipe… just go back. No fancy redirection, unfortunately. -->
+<button class="btn btn-primary " href="#" onclick="history.go(-1)">Generate another recipe</button>
 {% endif %}
 {% endblock content%}
