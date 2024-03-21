@@ -13,19 +13,30 @@
 
 <body>
   <div id="header">
-    <nav class="navbar">
+    <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">FridgeToFeast</a>
-        <ul class="navbar-nav">
-          <li class="nav-item">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'list_ingredients' %}">Edit kitchen</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'statistics_overview' %}">View report</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
             {% if request.user.is_authenticated %}
             <form method="post" action="{% url 'logout' %}">
               {% csrf_token %}
-              <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
+              <button type="submit" class="position-absolute me-2 mt-2 top-0 end-0 btn btn-secondary btn-sm">Logout</button>
             </form>
             {% endif %}
-          </li>
-        </ul>
+          </span>
+        </div>
       </div>
     </nav>
   </div>
