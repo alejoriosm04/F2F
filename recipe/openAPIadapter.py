@@ -12,6 +12,7 @@ class OpenAIAdapter:
             "Create a recipe title and a recipe using the following ingredients: "
             "{ingredients}. Start the response with 'Title: ', followed by the recipe title. "
             "After the title, add the recipe steps starting with 'Recipe: '."
+            "Do not add the numbers. Only add the linebreaks."
             "As for preferences, I want the recipe to have: {preference}"
         ).format(ingredients=ingredients_string, preference=preference)
 

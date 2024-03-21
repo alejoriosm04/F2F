@@ -15,7 +15,7 @@ def index(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = request.user
-            response = generate_recipe(user, cd['preference'])
+            response = generate_recipe(request, user, cd['preference'])
             # TODO: Add the timestamp to the database.
             return response
     else:

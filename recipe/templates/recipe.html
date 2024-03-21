@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Generated recipe{% endblock title %}
+
+{% block content %}
+{% if recipe is None %}
+<div class="alert alert-danger" role="alert">
+{{ error_message }}
+</div>
+{% else %}
+<h1 class="mt5">
+{{ recipe.title }}
+</h1>
+<ol>
+{% for step in recipe.description %}
+<li>{{ step }}</li>
+{% endfor %}
+</ol>
+<!-- Since we are just using around 100 tokens, the response might get cut off. -->
+<p class="fs-1">…</p>
+<button class="btn btn-primary " href="{% url 'home' %}">Generate another recipe</button>
+{% endif %}
+{% endblock content%}

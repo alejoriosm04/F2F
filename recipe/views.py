@@ -1,15 +1,14 @@
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.shortcuts import render
 from .openAPIadapter import OpenAIAdapter
 from kitchen.models import Ingredient
 from .models import Recipe
-import os
 
-def generate_recipe(user, preference):
+
+def generate_recipe(request, user, preference):
     user_ingredients = list(Ingredient.objects.filter(user=user).values_list('name', flat=True))
 
     if not user_ingredients:
-        return JsonResponse({"error": "No ingredients found for the user."}, status=404)
+        return render(request, "recipe.html", {"recipe": None, "error_message": "User has no ingredients."})
 
     user_ingredients = ', '.join(user_ingredients)
     adapter = OpenAIAdapter()
@@ -18,8 +17,7 @@ def generate_recipe(user, preference):
         recipe_data = adapter.generate_response_sync(user_ingredients, preference)
 
         if not recipe_data:
-            # Si la API no devolvió datos, regresa un error
-            return JsonResponse({"error": "The OpenAI API did not generate a recipe."}, status=500)
+            return render(request, "recipe.html", {"recipe": None, "error_message": "The OpenAI API did not generate a recipe."})
 
         try:
             # Intenta extraer el título y la receta según el formato esperado
@@ -28,29 +26,27 @@ def generate_recipe(user, preference):
                 raise ValueError("Incomplete recipe format.")
 
             title = parts[0].replace('Title:', '').strip()
-            recipe = parts[1].strip()
+            description = parts[1].strip()
 
-            if not title or not recipe:
+            if not title or not description:
                 raise ValueError("Incomplete recipe format.")
 
             # Si todo es correcto, guarda la receta en la base de datos
             new_recipe = Recipe(
                 user=user,
                 title=title,
-                description=recipe,
+                description=description,
                 parameters=user_ingredients,
             )
             new_recipe.save()
 
-            return JsonResponse({
-                "title": title,
-                "recipe": recipe
-            })
+            # Split steps using the linebreaks ('\n').
+            description = description.splitlines()
 
-        except ValueError as e:
-            # Maneja el error de formato en la respuesta
-            return JsonResponse({"error": str(e)}, status=500)
+            return render(request, "recipe.html", {"recipe": {"title": title, "description": description}, "error_message": None})
 
-    except Exception as e:
-        print(e)
-        return JsonResponse({"error": "An error occurred while fetching the recipe."}, status=500)
+        except ValueError as _:
+            return render(request, "recipe.html", {"recipe": None, "error_message": "Unknown error."})
+
+    except Exception as _:
+        return render(request, "recipe.html", {"recipe": None, "error_message": "Unknown error."})
