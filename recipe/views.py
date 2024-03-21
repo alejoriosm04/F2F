@@ -42,6 +42,8 @@ def generate_recipe(request, user, preference):
 
             # Split steps using the linebreaks ('\n').
             description = description.splitlines()
+            # But clean them, anyway.
+            description = [step for step in description if len(step) > 2]
 
             return render(request, "recipe.html", {"recipe": {"title": title, "description": description}, "error_message": None})
 
