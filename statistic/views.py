@@ -6,6 +6,14 @@ from kitchen.models import Ingredient
 from django.db.models.functions import TruncDay
 from django.db.models import Count
 
+
+# Use a non-interactive Matplotlib backend to prevent a runtime error from
+# starting a Matplotlib GUI outside of main thread.
+# See also: https://stackoverflow.com/q/69924881
+import matplotlib
+matplotlib.use('agg')
+
+
 def overview(request):
     ingredients_per_day = Ingredient.objects.annotate(day=TruncDay('created_at')).values('day').annotate(total=Count('id')).order_by('day')
     days = [ingredient['day'] for ingredient in ingredients_per_day]
