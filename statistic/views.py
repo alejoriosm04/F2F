@@ -1,5 +1,6 @@
 import io
 import base64
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from matplotlib import pyplot as plt
 from kitchen.models import Ingredient
@@ -13,7 +14,7 @@ from django.db.models import Count
 import matplotlib
 matplotlib.use('agg')
 
-
+@login_required
 def overview(request):
     ingredients_per_day = Ingredient.objects.annotate(day=TruncDay('created_at')).values('day').annotate(total=Count('id')).order_by('day')
     days = [ingredient['day'] for ingredient in ingredients_per_day]
