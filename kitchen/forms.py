@@ -3,11 +3,12 @@ from .models import Ingredient
 
 class RecipeForm(forms.Form):
   details = forms.CharField(
+    widget=forms.TextInput(attrs={'placeholder': 'I want a recipe that is …'}),
     max_length=100,
-    help_text="What should the recipe be like?",
     required=False,
   )
   preference = forms.CharField(
+    widget=forms.TextInput(attrs={'placeholder': 'What kind of cuisine do you like?'}),
     max_length=100,
     required=False,
   )

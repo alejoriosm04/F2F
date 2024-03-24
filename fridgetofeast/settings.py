@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'kitchen',
     'recipe',
-    'statistic'
+    'statistic',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [

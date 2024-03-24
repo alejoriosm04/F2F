@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% load django_bootstrap5 %}
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -8,7 +10,7 @@
 <p>Generate recipes with AI.</p>
 <form method="post">
   {% csrf_token %}
-  {{ form }}
+  {% bootstrap_form form %}
   <input type="submit" class="btn btn-primary" value="Generate recipe">
 </form>
 {% endblock %}
