@@ -12,43 +12,20 @@ def generate_recipe(request, user, preference):
 
     user_ingredients = ', '.join(user_ingredients)
     adapter = OpenAIAdapter()
+    recipe = adapter.generate_response_sync(user_ingredients, preference)
 
-    try:
-        recipe_data = adapter.generate_response_sync(user_ingredients, preference)
+    error_message = None
 
-        if not recipe_data:
-            return render(request, "recipe.html", {"recipe": None, "error_message": "The OpenAI API did not generate a recipe."})
+    if recipe is None:
+        error_message = "The OpenAI API did not generate a recipe."
+    else:
+        # Si todo es correcto, guarda la receta en la base de datos
+        new_recipe = Recipe(
+            user=user,
+            title=recipe['title'],
+            description=recipe['description'],
+            parameters=user_ingredients,
+        )
+        new_recipe.save()
 
-        try:
-            # Intenta extraer el título y la receta según el formato esperado
-            parts = recipe_data.split('Recipe:')
-            if len(parts) < 2 or not parts[0] or not parts[1]:
-                raise ValueError("Incomplete recipe format.")
-
-            title = parts[0].replace('Title:', '').strip()
-            description = parts[1].strip()
-
-            if not title or not description:
-                raise ValueError("Incomplete recipe format.")
-
-            # Si todo es correcto, guarda la receta en la base de datos
-            new_recipe = Recipe(
-                user=user,
-                title=title,
-                description=description,
-                parameters=user_ingredients,
-            )
-            new_recipe.save()
-
-            # Split steps using the linebreaks ('\n').
-            description = description.splitlines()
-            # But clean them, anyway.
-            description = [step for step in description if len(step) > 2]
-
-            return render(request, "recipe.html", {"recipe": {"title": title, "description": description}, "error_message": None})
-
-        except ValueError as _:
-            return render(request, "recipe.html", {"recipe": None, "error_message": "Unknown error."})
-
-    except Exception as _:
-        return render(request, "recipe.html", {"recipe": None, "error_message": "Unknown error."})
+    return render(request, "recipe.html", {"recipe": recipe, "error_message": error_message})

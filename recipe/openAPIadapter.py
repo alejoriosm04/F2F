@@ -16,7 +16,10 @@ class OpenAIAdapter:
             "As for preferences, I want the recipe to have: {preference}"
         ).format(ingredients=ingredients_string, preference=preference)
 
-        return asyncio.run(self._generate_response(instruction))
+        response = asyncio.run(self._generate_response(instruction))
+        cleaned = self.validate_recipe(response)
+
+        return cleaned
 
     async def _generate_response(self, instruction: str):
         messages = [
@@ -33,3 +36,22 @@ class OpenAIAdapter:
         recipe_text = response.choices[0].message.content if response.choices else ""
 
         return recipe_text
+
+    def validate_recipe(self, api_response):
+        # Intenta extraer el título y la receta según el formato esperado
+        parts = api_response.split('Recipe:')
+        if len(parts) < 2 or not parts[0] or not parts[1]:
+            return None
+
+        title = parts[0].replace('Title:', '').strip()
+        description = parts[1].strip()
+
+        if not title or not description:
+            return None
+
+        # Split steps using the linebreaks ('\n').
+        description = description.splitlines()
+        # But clean them, anyway.
+        description = [step for step in description if len(step) > 2]
+
+        return {'title': title, 'description': description}
