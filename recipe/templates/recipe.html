@@ -19,6 +19,9 @@
 </ol>
 <!-- Since we are just using around 100 tokens, the response might get cut off. -->
 <p class="fs-1">…</p>
+<div class="container mb-4">
+<img src="{{ recipe.image_url }}" class="img-fluid" alt="AI-generated image of the recipe.">
+</div>
 <!-- To generate another recipe… just go back. No fancy redirection, unfortunately. -->
 <button class="btn btn-primary " href="#" onclick="history.go(-1)">Generate another recipe</button>
 {% endif %}

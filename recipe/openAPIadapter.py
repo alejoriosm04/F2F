@@ -59,3 +59,20 @@ class OpenAIAdapter:
         description = [step for step in description if len(step) > 2]
 
         return {'title': title, 'description': description}
+
+    def generate_image(self, recipe):
+        recipe_as_str = recipe['title'] + ' '.join(recipe['description'])
+        prompt = "Colourful image of the following recipe: " + recipe_as_str
+        response = OpenAIAdapter.client.images.generate(
+            model="dall-e-2",
+            prompt=prompt,
+            size="256x256",
+            quality="standard",
+            n=1,
+        )
+
+        url = None
+        if response is not None:
+            url = response.data[0].url
+
+        return url
