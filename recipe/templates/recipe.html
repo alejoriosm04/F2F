@@ -57,7 +57,7 @@ document.querySelector('button.get-image')
 <div class="container mb-4">
 <button class="btn btn-primary get-image" href="#" data-id="{{ recipe.id }}">Generate image</button>
 <p id="loading" hidden>Loading, please wait…</p>
-<img id="image" hidden src="{{ recipe.image_url }}" class="img-fluid" alt="AI-generated image of the recipe.">
+<img id="image" hidden class="img-fluid" alt="AI-generated image of the recipe.">
 </div>
 <!-- To generate another recipe… just go back. No fancy redirection, unfortunately. -->
 <button class="btn btn-primary " href="#" onclick="history.go(-1)">Generate another recipe</button>
