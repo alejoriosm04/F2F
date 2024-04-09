@@ -3,6 +3,36 @@
 
 {% block title %}Generated recipe{% endblock title %}
 
+{% block domready %}
+const url = '{% url "recipe:get_image" %}';
+var options = {
+    method: 'POST',
+    headers: {'X-CSRFToken': csrftoken},
+    mode: 'same-origin',
+}
+
+document.querySelector('button.get-image')
+        .addEventListener('click', function(e){
+    e.preventDefault(); // Don't follow the hyperlink.
+    var getImageButton = this;
+
+    // Request body.
+    var formData = new FormData();
+    formData.append('recipe_description', "fluffy bears in a pond");
+    options['body'] = formData;
+
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data['image_url']) {
+            var image = document.querySelector('img#image');
+            image.setAttribute("src", data['image_url']);
+        }
+    });
+ });
+{% endblock %}
+
 {% block content %}
 {% if recipe is None %}
 <div class="alert alert-danger" role="alert">
@@ -20,7 +50,8 @@
 <!-- Since we are just using around 100 tokens, the response might get cut off. -->
 <p class="fs-1">…</p>
 <div class="container mb-4">
-<img src="{{ recipe.image_url }}" class="img-fluid" alt="AI-generated image of the recipe.">
+<button class="btn btn-primary get-image" href="#">Generate image</button>
+<img id="image" src="{{ recipe.image_url }}" class="img-fluid" alt="AI-generated image of the recipe.">
 </div>
 <!-- To generate another recipe… just go back. No fancy redirection, unfortunately. -->
 <button class="btn btn-primary " href="#" onclick="history.go(-1)">Generate another recipe</button>

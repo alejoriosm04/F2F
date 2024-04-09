@@ -36,9 +36,9 @@ def generate_recipe(request, user, preference):
 @login_required
 @require_POST
 def get_image(request):
-    recipe_description = request.POST.get('recipe_text')
-    if recipe_description:
+    # recipe_description = request.POST.get('recipe_text')
+    # if recipe_description:
         adapter = OpenAIAdapter()
-        image = adapter.generate_image(recipe_description)
-        return JsonResponse({'image_url': None})
+        image_url = adapter.generate_image({'title': "Rice with milk", "description": ['Prepare the tomatoes', 'Cut the onions', 'Enjoy']})
+        return JsonResponse({'image_url': image_url})
 
