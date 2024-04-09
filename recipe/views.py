@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
@@ -41,7 +41,16 @@ def generate_recipe(request):
             new_recipe.save()
             new_recipe.id
 
+            return redirect(new_recipe)
+
         return render(request, "recipe.html", {"recipe": recipe, "error_message": error_message})
+
+@login_required
+def show_recipe(request, pk):
+    recipe = Recipe.objects.get(id=pk)
+    import ast
+    recipe.description = ast.literal_eval(recipe.description) # Deserialize safely.
+    return render(request, "recipe.html", {"recipe": recipe, "error_message": None})
 
 @login_required
 @require_POST
