@@ -11,7 +11,7 @@
 <form method="post">
   {% csrf_token %}
   {% bootstrap_form form %}
-  <input type="submit" class="btn btn-primary" value="Generate recipe">
+  <input type="submit" class="btn btn-primary" value="Generate recipe" formaction="{% url 'recipe:generate_recipe' %}">
 </form>
 {% endblock %}
 

@@ -5,21 +5,14 @@ from .models import Ingredient
 from .forms import RecipeForm, IngredientForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_GET
 
 from recipe.views import generate_recipe
 
 @login_required
+@require_GET
 def index(request):
-    if request.method == "POST":
-        form = RecipeForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = request.user
-            preference = cd['preference']
-            return generate_recipe(request, user, preference)
-            # TODO: Add the timestamp to the database.
-    else:
-        form = RecipeForm()
+    form = RecipeForm()
     return render(request, "home.html", {"form": form})
 
 @login_required
