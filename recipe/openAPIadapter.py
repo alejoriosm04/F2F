@@ -18,11 +18,6 @@ class OpenAIAdapter:
         response = self._generate_response(instruction)
         cleaned = self.validate_recipe(response)
 
-        if cleaned is not None:
-            image_url = self.generate_image(cleaned)
-            if image_url is not None:
-                cleaned['image_url'] = image_url
-
         return cleaned
 
     def _generate_response(self, instruction: str):
