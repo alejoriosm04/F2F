@@ -1,6 +1,7 @@
 from openai import OpenAI
 import os
 from django.conf import settings
+from .models import Recipe
 
 
 class OpenAIAdapter:
@@ -55,8 +56,13 @@ class OpenAIAdapter:
 
         return {'title': title, 'description': description}
 
-    def generate_image(self, recipe):
-        recipe_as_str = recipe['title'] + ' '.join(recipe['description'])
+    def generate_image(self, recipe_id):
+        recipe = Recipe.objects.get(id=recipe_id)
+        import ast
+        recipe.description = ast.literal_eval(recipe.description) # Deserialize safely.
+        recipe_as_str = recipe.title + ' '.join(recipe.description)
+        recipe_as_str = recipe_as_str[:1000]  # We can't send prompts longer than 1000 characters.
+        print(recipe_as_str)
         prompt = "Colourful image of the following recipe: " + recipe_as_str
         response = OpenAIAdapter.client.images.generate(
             model="dall-e-2",
