@@ -59,7 +59,6 @@ document.querySelector('button#get-image')
 <p id="loading" hidden>Loading, please wait…</p>
 <img id="image" hidden class="img-fluid" alt="AI-generated image of the recipe.">
 </div>
-<!-- To generate another recipe… just go back. No fancy redirection, unfortunately. -->
-<button class="btn btn-primary " href="#" onclick="history.go(-1)">Generate another recipe</button>
+<a class="button-88" type="button" href="{% url 'home' %}">Generate another recipe</a>
 {% endif %}
 {% endblock content%}
