@@ -16,6 +16,8 @@ document.querySelector('button.get-image')
     e.preventDefault(); // Don't follow the hyperlink.
     var getImageButton = this;
     getImageButton.toggleAttribute("hidden");
+    var loadingMessage = document.querySelector('p#loading');
+    loadingMessage.toggleAttribute("hidden", false);
 
     // Request body.
     var formData = new FormData();
@@ -30,6 +32,7 @@ document.querySelector('button.get-image')
             var image = document.querySelector('img#image');
             image.setAttribute("src", data['image_url']);
             image.toggleAttribute("hidden");
+            loadingMessage.toggleAttribute("hidden", true);
         }
     });
  });
@@ -53,6 +56,7 @@ document.querySelector('button.get-image')
 <p class="fs-1">…</p>
 <div class="container mb-4">
 <button class="btn btn-primary get-image" href="#" data-id="{{ recipe.id }}">Generate image</button>
+<p id="loading" hidden>Loading, please wait…</p>
 <img id="image" hidden src="{{ recipe.image_url }}" class="img-fluid" alt="AI-generated image of the recipe.">
 </div>
 <!-- To generate another recipe… just go back. No fancy redirection, unfortunately. -->
