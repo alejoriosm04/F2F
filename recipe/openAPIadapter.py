@@ -5,7 +5,10 @@ from .models import Recipe
 
 
 class OpenAIAdapter:
-    client = OpenAI(api_key=settings.OPENAI_API_KEY)
+    from dotenv import load_dotenv
+    load_dotenv('.env')
+    api_key = os.getenv('OPENAI_API_KEY')
+    client = OpenAI(api_key=api_key)
 
     def generate_response_sync(self,ingredients_string: str, preference):
         instruction = (
