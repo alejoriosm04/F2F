@@ -18,4 +18,8 @@
 
 5. Run `python manage.py runserver`
 
-6. Access `localhost:8000` from a modern web browser.
+6. Apply migrations with `python manage.py migrate`
+
+7. Create a superuser with `python manage.py createsuperuser`
+
+8. Access `localhost:8000` from a modern web browser.
