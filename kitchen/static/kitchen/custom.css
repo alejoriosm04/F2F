@@ -1,5 +1,6 @@
 body {
   background-color: #fde4ce;
+  --bs-body-font-family: "Glory", var(--bs-font-sans-serif);
 }
 
 /* Copied from here: https://getcssscan.com/css-buttons-examples */
