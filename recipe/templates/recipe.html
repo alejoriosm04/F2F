@@ -63,6 +63,6 @@ document.querySelector('button#get-image')
 <p id="loading" hidden>Loading, please wait…</p>
 <img id="image" hidden class="img-fluid" alt="AI-generated image of the recipe.">
 </div>
-<a type="button" class="btn btn-another-recipe" href="{% url 'home' %}">Generate another recipe</a>
+<a type="button" class="btn btn-another-recipe text-decoration-none" href="{% url 'home' %}">Generate another recipe</a>
 {% endif %}
 {% endblock content%}
