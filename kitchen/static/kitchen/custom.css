@@ -1,102 +1,37 @@
+:root {
+  /* FTF's color palette */
+  --ftf-purple: #812dab;
+  --ftf-purple-shadow: #5f3574;
+  --ftf-light-orange: #fde4ce;
+  --ftf-dark-green: #1e2e2b;
+  --ftf-gold: #c39023;
+  --ftf-gold-shadow: #ad8224;
+  --ftf-orange: #f58243;
+  --ftf-orange-shadow: #c97446;
+
+  /* Overriding Bootstrap colors */
+  --bs-primary: var(--ftf-purple);
+  --bs-primary-rgb: var(--ftf-purple);
+  --bs-body-color: var(--ftf-gold);
+}
+
 body {
-  background-color: #fde4ce;
+  background-color: var(--ftf-light-orange);
+  --bs-body-color: var(--ftf-dark-green);
+  --bs-body-font-family: "Glory", var(--bs-font-sans-serif);
 }
 
-/* Copied from here: https://getcssscan.com/css-buttons-examples */
-.button-85 {
-  padding: 0.6em 2em;
-  border: none;
-  outline: none;
-  color: rgb(255, 255, 255);
-  background: #111;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  border-radius: 10px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+.btn-primary {
+  --bs-btn-bg: var(--ftf-purple);
+  --bs-btn-border-color: var(--bs-btn-bg);
+  --bs-btn-hover-bg: var(--ftf-purple-shadow);
+  --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
 }
 
-.button-85:before {
-  content: "";
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000
-  );
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 400%;
-  z-index: -1;
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing-button-85 20s linear infinite;
-  transition: opacity 0.3s ease-in-out;
-  border-radius: 10px;
+.btn-secondary {
+  --bs-btn-bg: var(--ftf-gold);
+  --bs-btn-border-color: var(--bs-btn-bg);
+  --bs-btn-hover-bg: var(--ftf-gold-shadow);
+  --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
 }
 
-@keyframes glowing-button-85 {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 400% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
-
-.button-85:after {
-  z-index: -1;
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #222;
-  left: 0;
-  top: 0;
-  border-radius: 10px;
-}
-
-
-/* Copied from the same source as button-88 */
-.button-88 {
-  align-items: center;
-  font-family: inherit;
-  font-weight: 500;
-  font-size: 16px;
-  padding: 0.7em 1.4em 0.7em 1.1em;
-  color: white;
-  background: #ad5389;
-  background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
-  border: none;
-  box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
-  letter-spacing: 0.05em;
-  border-radius: 20em;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-
-  text-decoration: none;
-}
-
-.button-88:hover {
-  box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
-}
-
-.button-88:active {
-  box-shadow: 0 0.3em 1em -0.5em #14a73e98;
-}

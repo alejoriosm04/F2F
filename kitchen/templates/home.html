@@ -6,8 +6,8 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>FridgeToFeast</h1>
-<p>Generate recipes with AI.</p>
+<h1 style="color: var(--ftf-orange)">FridgeToFeast</h1>
+<p class="lead">Harness your food.</p>
 <form method="post">
   {% csrf_token %}
   {% bootstrap_form form %}
