@@ -3,6 +3,10 @@
 
 {% block title %}Generated recipe{% endblock title %}
 
+{% block styles %}
+<link href="{% static "kitchen/recipe.css" %}" rel="stylesheet">
+{% endblock styles %}
+
 {% block domready %}
 const url = '{% url "recipe:get_image" %}';
 var options = {
@@ -59,6 +63,6 @@ document.querySelector('button#get-image')
 <p id="loading" hidden>Loading, please wait…</p>
 <img id="image" hidden class="img-fluid" alt="AI-generated image of the recipe.">
 </div>
-<a class="button-88" type="button" href="{% url 'home' %}">Generate another recipe</a>
+<a type="button" class="btn btn-another-recipe" href="{% url 'home' %}">Generate another recipe</a>
 {% endif %}
 {% endblock content%}
