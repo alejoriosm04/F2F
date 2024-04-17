@@ -15,6 +15,7 @@ def generate_recipe(request):
     if form.is_valid():
         cd = form.cleaned_data
         user = request.user
+        details = cd['details']
         preference = cd['preference']
         # TODO: Add the timestamp to the database.
 
@@ -24,7 +25,7 @@ def generate_recipe(request):
 
         user_ingredients = ', '.join(user_ingredients)
         adapter = OpenAIAdapter()
-        recipe = adapter.generate_response_sync(user_ingredients, preference)
+        recipe = adapter.generate_response_sync(user_ingredients, details, preference)
 
         error_message = None
 
