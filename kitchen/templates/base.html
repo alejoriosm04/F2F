@@ -41,6 +41,7 @@
         <a class="navbar-brand" href="{% url 'home' %}">
             <img src="{% static "kitchen/logo-kurz.png" %}" width="50" class="d-inline-block align-text-middle" alt="Logo">
         </a>
+        {% if request.user.is_authenticated %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,14 +55,13 @@
             </li>
           </ul>
           <span class="navbar-text">
-            {% if request.user.is_authenticated %}
             <form method="post" action="{% url 'logout' %}">
               {% csrf_token %}
               <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
             </form>
-            {% endif %}
           </span>
         </div>
+        {% endif %}
       </div>
     </nav>
   </div>
