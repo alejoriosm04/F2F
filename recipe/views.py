@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from .openAPIadapter import OpenAIAdapter
-from kitchen.models import Ingredient
+from kitchen.models import Ingredient, RecipeHadIngredient
 from .models import Recipe
 from kitchen.forms import RecipeForm
 
@@ -23,6 +23,7 @@ def generate_recipe(request):
         if not user_ingredients:
             return render(request, "recipe.html", {"recipe": None, "error_message": "User has no ingredients."})
 
+        unchanged_user_ingredients = user_ingredients
         user_ingredients = ', '.join(user_ingredients)
         adapter = OpenAIAdapter()
         recipe = adapter.generate_response_sync(user_ingredients, details, preference)
@@ -40,8 +41,15 @@ def generate_recipe(request):
                     parameters=user_ingredients,
                     )
             new_recipe.save()
-            new_recipe.id
 
+            for ingredient in unchanged_user_ingredients:
+                new_ingredient = RecipeHadIngredient(
+                        recipe_id=new_recipe,
+                        ingredient_name=ingredient,
+                )
+                new_ingredient.save()
+
+            new_recipe.id
             return redirect(new_recipe)
 
         return render(request, "recipe.html", {"recipe": recipe, "error_message": error_message})
