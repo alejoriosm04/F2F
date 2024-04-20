@@ -18,7 +18,7 @@
 body {
   background-color: var(--ftf-light-orange);
   --bs-body-color: var(--ftf-dark-green);
-  --bs-body-font-family: "Glory", var(--bs-font-sans-serif);
+  --bs-body-font-family: "Montserrat", "Glory", var(--bs-font-sans-serif);
 }
 
 .btn-primary {
