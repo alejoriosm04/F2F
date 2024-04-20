@@ -1,33 +1,37 @@
-import asyncio
-from openai import AsyncOpenAI
+from openai import OpenAI
 import os
 from django.conf import settings
+from .models import Recipe
 
 
 class OpenAIAdapter:
-    client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
+    from dotenv import load_dotenv
+    load_dotenv('.env')
+    api_key = os.getenv('OPENAI_API_KEY')
+    client = OpenAI(api_key=api_key)
 
-    def generate_response_sync(self,ingredients_string: str, preference):
+    def generate_response_sync(self,ingredients_string: str, details, preference):
         instruction = (
             "Create a recipe title and a recipe using the following ingredients: "
             "{ingredients}. Start the response with 'Title: ', followed by the recipe title. "
             "After the title, add the recipe steps starting with 'Recipe: '."
             "Do not add the numbers. Only add the linebreaks."
-            "As for preferences, I want the recipe to have: {preference}"
-        ).format(ingredients=ingredients_string, preference=preference)
+            "Here are some specific instructions that must be kept in mind when generating it: {details}"
+            "I want the recipe to be {preference} cuisine."
+        ).format(ingredients=ingredients_string, details=details, preference=preference)
 
-        response = asyncio.run(self._generate_response(instruction))
+        response = self._generate_response(instruction)
         cleaned = self.validate_recipe(response)
 
         return cleaned
 
-    async def _generate_response(self, instruction: str):
+    def _generate_response(self, instruction: str):
         messages = [
             {"role": "system", "content": instruction},
             {"role": "user", "content": "Please create the recipe."}
         ]
 
-        response = await OpenAIAdapter.client.chat.completions.create(
+        response = OpenAIAdapter.client.chat.completions.create(
             model='gpt-3.5-turbo',
             max_tokens=150,
             temperature=0.5,
@@ -55,3 +59,24 @@ class OpenAIAdapter:
         description = [step for step in description if len(step) > 2]
 
         return {'title': title, 'description': description}
+
+    def generate_image(self, recipe_id):
+        recipe = Recipe.objects.get(id=recipe_id)
+        import ast
+        recipe.description = ast.literal_eval(recipe.description) # Deserialize safely.
+        recipe_as_str = recipe.title + ' ' + ' '.join(recipe.description)
+        recipe_as_str = recipe_as_str[:1000]  # We can't send prompts longer than 1000 characters.
+        prompt = "Generate a colourful image of this recipe: " + recipe_as_str
+        response = OpenAIAdapter.client.images.generate(
+            model="dall-e-2",
+            prompt=prompt,
+            size="256x256",
+            quality="standard",
+            n=1,
+        )
+
+        url = None
+        if response is not None:
+            url = response.data[0].url
+
+        return url

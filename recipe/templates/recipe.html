@@ -3,6 +3,45 @@
 
 {% block title %}Generated recipe{% endblock title %}
 
+{% block styles %}
+<link href="{% static "kitchen/recipe.css" %}" rel="stylesheet">
+{% endblock styles %}
+
+{% block domready %}
+const url = '{% url "recipe:get_image" %}';
+var options = {
+    method: 'POST',
+    headers: {'X-CSRFToken': csrftoken},
+    mode: 'same-origin',
+}
+
+document.querySelector('button#get-image')
+        .addEventListener('click', function(e){
+    e.preventDefault(); // Don't follow the hyperlink.
+    var getImageButton = this;
+    getImageButton.toggleAttribute("hidden");
+    var loadingMessage = document.querySelector('p#loading');
+    loadingMessage.toggleAttribute("hidden", false);
+
+    // Request body.
+    var formData = new FormData();
+    formData.append('recipe_id', getImageButton.dataset.id);
+    options['body'] = formData;
+
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data['image_url']) {
+            var image = document.querySelector('img#image');
+            image.setAttribute("src", data['image_url']);
+            image.toggleAttribute("hidden");
+            loadingMessage.toggleAttribute("hidden", true);
+        }
+    });
+ });
+{% endblock %}
+
 {% block content %}
 {% if recipe is None %}
 <div class="alert alert-danger" role="alert">
@@ -19,7 +58,11 @@
 </ol>
 <!-- Since we are just using around 100 tokens, the response might get cut off. -->
 <p class="fs-1">…</p>
-<!-- To generate another recipe… just go back. No fancy redirection, unfortunately. -->
-<button class="btn btn-primary " href="#" onclick="history.go(-1)">Generate another recipe</button>
+<div class="container mb-4">
+<button id="get-image" class="button-85" data-id="{{ recipe.id }}">Generate image</button>
+<p id="loading" hidden>Loading, please wait…</p>
+<img id="image" hidden class="img-fluid" alt="AI-generated image of the recipe.">
+</div>
+<a type="button" class="btn btn-another-recipe text-decoration-none" href="{% url 'home' %}">Generate another recipe</a>
 {% endif %}
 {% endblock content%}

@@ -16,15 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load environment variables.
-import environ
-import os
-env = environ.Env(
-    # If an env variable is not found, return False.
-    DEBUG=(bool, False)
-)
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -158,5 +149,3 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-# ChatGPT API.
-OPENAI_API_KEY = env('OPENAI_API_KEY')

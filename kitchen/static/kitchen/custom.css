@@ -1,3 +1,37 @@
-body {
-  background-color: #fde4ce;
+:root {
+  /* FTF's color palette */
+  --ftf-purple: #812dab;
+  --ftf-purple-shadow: #5f3574;
+  --ftf-light-orange: #fde4ce;
+  --ftf-dark-green: #1e2e2b;
+  --ftf-gold: #c39023;
+  --ftf-gold-shadow: #ad8224;
+  --ftf-orange: #f58243;
+  --ftf-orange-shadow: #c97446;
+
+  /* Overriding Bootstrap colors */
+  --bs-primary: var(--ftf-purple);
+  --bs-primary-rgb: var(--ftf-purple);
+  --bs-body-color: var(--ftf-gold);
 }
+
+body {
+  background-color: var(--ftf-light-orange);
+  --bs-body-color: var(--ftf-dark-green);
+  --bs-body-font-family: "Montserrat", "Glory", var(--bs-font-sans-serif);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--ftf-purple);
+  --bs-btn-border-color: var(--bs-btn-bg);
+  --bs-btn-hover-bg: var(--ftf-purple-shadow);
+  --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+}
+
+.btn-secondary {
+  --bs-btn-bg: var(--ftf-gold);
+  --bs-btn-border-color: var(--bs-btn-bg);
+  --bs-btn-hover-bg: var(--ftf-gold-shadow);
+  --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+}
+
