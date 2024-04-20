@@ -16,10 +16,10 @@
 
 4. Set your OpenAI API key as an environment variable with `export OPENAI_API_KEY=your_api_key_here`
 
-5. Apply migrations with `python manage.py migrate`
+5. Run `python manage.py runserver`
 
-6. Create a superuser with `python manage.py createsuperuser`
+6. Apply migrations with `python manage.py migrate`
 
-7. Run `python manage.py runserver`
+7. Create a superuser with `python manage.py createsuperuser`
 
 8. Access `localhost:8000` from a modern web browser.
