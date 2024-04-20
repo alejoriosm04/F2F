@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="signup-wrapper py-5">
+  <h2 class="text-center mb-4 animated-title">Create Your Account</h2>
+  <form method="post" class="g-3 needs-validation form-stylish" novalidate>
+    {% csrf_token %}
+    <div class="row">
+      {% for field in form %}
+      <div class="col-md-12 mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+        <div class="form-text">{{ field.help_text }}</div>
+        {% endif %}
+        {% for error in field.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-lg btn-register">Sign Up</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+

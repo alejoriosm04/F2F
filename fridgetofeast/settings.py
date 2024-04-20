@@ -145,7 +145,7 @@ LOGOUT_URL = 'logout'
 
 # Custom authentication backends.
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
     'user.authentication.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
