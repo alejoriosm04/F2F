@@ -1,0 +1,83 @@
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed; /* Fijo en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+  background-color: rgba(0,0,0,0.4); /* Fondo oscurecido */
+  display: flex; /* Usa flexbox para centrar el contenido del modal */
+  justify-content: center; /* Centrado horizontalmente */
+  align-items: start; /* Alineado al inicio para mover hacia arriba */
+  padding-top: 5%; /* Espacio en la parte superior, ajusta según necesites */
+}
+
+.modal-content {
+  background-color: #fff; /* Fondo blanco para el contenido del modal */
+  padding: 20px;
+  border-radius: 20px; /* Bordes redondeados para seguir el diseño de iOS */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra suave para el modal */
+  width: auto; /* Ancho automático basado en el contenido interno */
+  max-width: 300px; /* Un máximo para evitar que se haga demasiado ancho */
+  animation: slideDown 0.5s ease-out forwards; /* Animación aplicada */
+}
+
+/* Animación que simula la entrada de una notificación */
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+/* Estilo para el botón */
+#updateReminder {
+  background-color: #007bff; /* Fondo azul, o el color que prefieras */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  display: block; /* Asegura que tome el ancho completo del contenedor */
+  border-radius: 14px; /* Esquinas redondeadas */
+  font-size: 16px;
+  margin: 8px auto; /* Centrado horizontal */
+  transition: background-color 0.3s ease;
+}
+
+#updateReminder:hover {
+  background-color: #0056b3; /* Un azul más oscuro al pasar el mouse */
+  cursor: pointer;
+}
+
+/* Animaciones para que el modal entre como una notificación */
+@keyframes fadeInDown {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 10%;
+    opacity: 1;
+  }
+}
+
+/* Si necesitas estilizar el botón de cierre */
+.close {
+  font-size: 24px;
+  color: #aaa;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.close:hover {
+  color: #777;
+  cursor: pointer;
+}
