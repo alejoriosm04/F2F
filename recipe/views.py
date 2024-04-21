@@ -7,7 +7,6 @@ from kitchen.models import Ingredient, RecipeHadIngredient
 from .models import Recipe
 from kitchen.forms import RecipeForm
 
-
 @login_required
 @require_POST
 def generate_recipe(request):
@@ -17,6 +16,7 @@ def generate_recipe(request):
         user = request.user
         details = cd['details']
         preference = cd['preference']
+        portions = cd['portions']
         # TODO: Add the timestamp to the database.
 
         user_ingredients = list(Ingredient.objects.filter(user=user).values_list('name', flat=True))
@@ -26,7 +26,7 @@ def generate_recipe(request):
         unchanged_user_ingredients = user_ingredients
         user_ingredients = ', '.join(user_ingredients)
         adapter = OpenAIAdapter()
-        recipe = adapter.generate_response_sync(user_ingredients, details, preference)
+        recipe = adapter.generate_response_sync(user_ingredients, details, preference, portions)
 
         error_message = None
 
