@@ -1,6 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, LoginForm
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
+
+class CustomLoginView(LoginView):
+    def form_valid(self, form):
+        # Llamar al método base primero
+        response = super(CustomLoginView, self).form_valid(form)
+        # Establecer la variable de sesión para mostrar el modal
+        self.request.session['show_modal'] = True
+        return response
 
 def register(request):
     if request.method == 'POST':
