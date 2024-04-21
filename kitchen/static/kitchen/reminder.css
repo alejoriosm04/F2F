@@ -19,7 +19,7 @@
   border-radius: 20px; /* Bordes redondeados para seguir el diseño de iOS */
   box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra suave para el modal */
   width: auto; /* Ancho automático basado en el contenido interno */
-  max-width: 300px; /* Un máximo para evitar que se haga demasiado ancho */
+  max-width: 500px; /* Un máximo para evitar que se haga demasiado ancho */
   animation: slideDown 0.5s ease-out forwards; /* Animación aplicada */
 }
 
@@ -35,26 +35,11 @@
   }
 }
 
-
-
-/* Estilo para el botón */
-#updateReminder {
-  background-color: #007bff; /* Fondo azul, o el color que prefieras */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  display: block; /* Asegura que tome el ancho completo del contenedor */
-  border-radius: 14px; /* Esquinas redondeadas */
-  font-size: 16px;
-  margin: 8px auto; /* Centrado horizontal */
-  transition: background-color 0.3s ease;
+.btn-primary{
+  width: 150px;
+  margin: auto;
 }
 
-#updateReminder:hover {
-  background-color: #0056b3; /* Un azul más oscuro al pasar el mouse */
-  cursor: pointer;
-}
 
 /* Animaciones para que el modal entre como una notificación */
 @keyframes fadeInDown {
@@ -81,3 +66,4 @@
   color: #777;
   cursor: pointer;
 }
+
