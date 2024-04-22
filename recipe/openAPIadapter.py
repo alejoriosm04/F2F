@@ -10,7 +10,7 @@ class OpenAIAdapter:
     api_key = os.getenv('OPENAI_API_KEY')
     client = OpenAI(api_key=api_key)
 
-    def generate_response_sync(self,ingredients_string: str, details, preference):
+    def generate_response_sync(self,ingredients_string: str, details, preference, portions):
         instruction = (
             "Create a recipe title and a recipe using the following ingredients: "
             "{ingredients}. Start the response with 'Title: ', followed by the recipe title. "
@@ -18,7 +18,8 @@ class OpenAIAdapter:
             "Do not add the numbers. Only add the linebreaks."
             "Here are some specific instructions that must be kept in mind when generating it: {details}"
             "I want the recipe to be {preference} cuisine."
-        ).format(ingredients=ingredients_string, details=details, preference=preference)
+            "The recipe is for {portions}, do the recipe with portions for that amount of people."
+        ).format(ingredients=ingredients_string, details=details, preference=preference, portions=portions)
 
         response = self._generate_response(instruction)
         cleaned = self.validate_recipe(response)

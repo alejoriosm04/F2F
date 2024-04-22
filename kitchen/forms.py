@@ -13,6 +13,7 @@ class RecipeForm(forms.Form):
   def __create_tuples(lst):
       return [(elem, elem) for elem in lst]
 
+  #Preferences to have in mind for that recipe.
   preference = forms.ChoiceField(
     required=False,
     # I got the list from here: https://en.wikipedia.org/wiki/List_of_cuisines
@@ -38,6 +39,24 @@ class RecipeForm(forms.Form):
     ]),
     label="What kind of cuisine are you looking for?",
   )
+  #Portion size for the recipe
+  portions = forms.ChoiceField(
+    required=False,
+    choices=__create_tuples([
+        _("1 person"),
+        _("2 people"),
+        _("3 people"),
+        _("4 people"),
+        _("5 people"),
+        _("6 people"),
+        _("7 people"),
+        _("8 people"),
+        _("9 people"),
+        _("+10 people"),
+    ]),
+    label="How many people is the recipe for?",
+  )
+
 
 
 class IngredientForm(forms.ModelForm):

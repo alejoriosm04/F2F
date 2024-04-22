@@ -7,6 +7,14 @@ from kitchen.models import Ingredient, RecipeHadIngredient
 from recipe.models import Recipe
 from django.db.models.functions import ExtractWeekDay
 from django.db.models import Count
+
+
+# Use a non-interactive Matplotlib backend to prevent a runtime error from
+# starting a Matplotlib GUI outside of main thread.
+# See also: https://stackoverflow.com/q/69924881
+import matplotlib
+matplotlib.use('agg')
+
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 

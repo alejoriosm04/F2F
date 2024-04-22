@@ -11,9 +11,6 @@ from recipe.views import generate_recipe
 
 @login_required
 @require_GET
-# def index(request):
-#     form = RecipeForm()
-#     return render(request, "home.html", {"form": form})
 def index(request):
     form = RecipeForm()
     show_modal = request.session.pop('show_modal', False)  # Extrae y elimina la variable de sesión
