@@ -26,8 +26,8 @@ def overview(request):
     # Most Used Ingredients
     most_used_ingredients = RecipeHadIngredient.objects.filter(recipe_id__user=user).values('ingredient_name').annotate(total=Count('ingredient_name')).order_by('-total')[:10]
     ingredients = [ingredient['ingredient_name'] for ingredient in most_used_ingredients]
-    counts = [ingredient['total'] for ingredient in most_used_ingredients]
-    colors = ['#812DAB', '#C39123', '#F58143', '#1E2E2B'] * 3  # Repeat colors as needed
+    counts = [int(ingredient['total']) for ingredient in most_used_ingredients]  # Convert counts to integers
+    colors = ['#812DAB', '#C39123', '#F58143', '#1E2E2B'] * 3
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 12), facecolor='none')
     fig.subplots_adjust(hspace=0.5)
@@ -48,7 +48,7 @@ def overview(request):
             colLabels=["Ingredient", "Usage Count"],
             cellLoc='center',
             loc='center',
-            colColours=['#F58143', '#F58143']  # Orange color for headers
+            colColours=['#F58143', '#F58143']
         )
         the_table.auto_set_font_size(False)
         the_table.set_fontsize(10)
@@ -66,7 +66,7 @@ def overview(request):
                                            .annotate(day_of_week=ExtractWeekDay('generation_date')) \
                                            .values('day_of_week') \
                                            .annotate(total=Count('id')) \
-                                           .order_by('day_of_week')    
+                                           .order_by('day_of_week')
     days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     totals = [0] * 7
     for data_point in daily_generation_stats:
