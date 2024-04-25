@@ -34,7 +34,7 @@ class OpenAIAdapter:
 
         response = OpenAIAdapter.client.chat.completions.create(
             model='gpt-3.5-turbo',
-            max_tokens=150,
+            max_tokens=500,
             temperature=0.5,
             messages=messages
         )
