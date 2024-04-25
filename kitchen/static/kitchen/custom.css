@@ -21,6 +21,12 @@ body {
   --bs-body-font-family: "Montserrat", "Glory", var(--bs-font-sans-serif);
 }
 
+h1.pretty {
+  color: var(--ftf-orange);
+  font-family: 'Glory';
+  font-weight: 800;
+}
+
 .btn-primary {
   --bs-btn-bg: var(--ftf-purple);
   --bs-btn-border-color: var(--bs-btn-bg);
