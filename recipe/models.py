@@ -25,4 +25,14 @@ class Recipe(models.Model):
         from django.urls import reverse
 
         return reverse("recipe:show", kwargs={"pk": self.pk})
-    
+
+    @property
+    def short_description(self):
+        preview_length = 150
+        import ast
+        description = ' '.join(ast.literal_eval(self.description))
+        try:
+            description = description[:preview_length]
+        except IndexError:
+            pass
+        return description

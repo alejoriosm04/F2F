@@ -72,3 +72,17 @@ def get_image(request):
         image_url = adapter.generate_image(recipe_id)
         return JsonResponse({'image_url': image_url})
 
+
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView
+@method_decorator(login_required, name="dispatch")
+class RecipeHistoryView(ListView):
+    paginate_by = 5
+    paginate_orphans = 2
+    template_name = "history.html"
+
+    def get_queryset(self):
+        return (Recipe.objects.
+                filter(user=self.request.user).
+                order_by("-generation_date") # Recent recipes first.
+        )

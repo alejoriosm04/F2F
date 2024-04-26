@@ -53,6 +53,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'statistics_overview' %}">View report</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'recipe:history' %}">My recipes</a>
+            </li>
           </ul>
           <span class="navbar-text">
             <form method="post" action="{% url 'logout' %}">

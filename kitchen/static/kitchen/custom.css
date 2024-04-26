@@ -21,6 +21,10 @@ body {
   --bs-body-font-family: "Montserrat", "Glory", var(--bs-font-sans-serif);
 }
 
+a.history {
+  color: var(--ftf-purple);
+}
+
 h1.pretty {
   color: var(--ftf-orange);
   font-family: 'Glory';
