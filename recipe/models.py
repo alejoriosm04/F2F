@@ -14,6 +14,8 @@ class Recipe(models.Model):
     parameters = models.TextField()  
     generation_date = models.DateField(auto_now_add=True)  # Esto automáticamente establecerá la fecha cuando la receta se cree
     image = models.URLField(blank=True, null=True)  
+    cuisine = models.TextField()
+    number_of_portions = models.TextField()
     favourite_state = models.BooleanField(default=False)
 
     def __str__(self):

@@ -39,6 +39,8 @@ def generate_recipe(request):
                     title=recipe['title'],
                     description=recipe['description'],
                     parameters=user_ingredients,
+                    cuisine=preference,
+                    number_of_portions=portions,
                     )
             new_recipe.save()
 
