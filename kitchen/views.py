@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from .models import Ingredient
 from .forms import RecipeForm, IngredientForm
 from django.contrib.auth.decorators import login_required
@@ -43,3 +44,16 @@ def delete_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(id=ingredient_id)
     ingredient.delete()
     return redirect("/kitchen/")
+
+
+from django.utils.decorators import method_decorator
+from django.views.generic.edit import UpdateView
+@method_decorator(login_required, name="dispatch")
+class IngredientEditView(UpdateView):
+    model = Ingredient
+    template = ["ingredient"]
+    fields = ["name", "quantity", "unit"]
+    template_name_suffix = "_edit_form"
+
+    def get_success_url(self):
+        return reverse("kitchen:list")

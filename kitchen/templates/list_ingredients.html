@@ -43,10 +43,15 @@
         <h5 class="mb-1">{{ ingredient.name }}</h5>
         <div class="fs-6">({{ ingredient.quantity }} {{ ingredient.get_unit_display }})</div>
       </div>
-      <form action="{% url 'kitchen:delete' ingredient.id %}" method="POST">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-      </form>
+      <div class="btn-group column-gap-3" role="group">
+          <form action="{% url 'kitchen:edit' pk=ingredient.id %}" method="GET">
+            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+          </form>
+          <form action="{% url 'kitchen:delete' ingredient.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+      </div>
     </div>
     {% endfor %}
   </div>
