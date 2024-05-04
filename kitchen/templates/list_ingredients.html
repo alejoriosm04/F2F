@@ -18,6 +18,16 @@
     <div class="mb-3">
       <input type="text" class="form-control" id="name" name="name" placeholder="Ingredient name" required>
     </div>
+    <div class="mb-3">
+      <input type="number" min="1" max="10000" class="form-control" id="name" name="quantity" placeholder="Quantity" required>
+    </div>
+    <div class="mb-3">
+      <select class="form-control" id="unit" name="unit" placeholder="Unit" required>
+          <option value="u">units</option>
+          <option value="kg">kg</option>
+          <option value="l">liters</option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">Add ingredient</button>
   </form>
 </div>
@@ -26,16 +36,22 @@
 <div class="card card-body">
   <h2 class="text-center">Ingredients List</h2>
   {% if ingredients %}
-  <div class="list-group">
+  <div class="list-group list-group-flush">
     {% for ingredient in ingredients %}
-    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    <div class="list-group-item d-flex justify-content-between align-items-center">
       <div>
         <h5 class="mb-1">{{ ingredient.name }}</h5>
+        <div class="fs-6">({{ ingredient.quantity }} {{ ingredient.get_unit_display }})</div>
       </div>
-      <form action="{% url 'kitchen:delete' ingredient.id %}" method="POST">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-      </form>
+      <div class="btn-group column-gap-3" role="group">
+          <form action="{% url 'kitchen:edit' pk=ingredient.id %}" method="GET">
+            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+          </form>
+          <form action="{% url 'kitchen:delete' ingredient.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+      </div>
     </div>
     {% endfor %}
   </div>
