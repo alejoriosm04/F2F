@@ -10,18 +10,21 @@ class OpenAIAdapter:
     api_key = os.getenv('OPENAI_API_KEY')
     client = OpenAI(api_key=api_key)
 
-    def generate_response_sync(self,ingredients_string: str, details, preference, portions):
+    def generate_response_sync(self, ingredients, details, preference, portions):
         instruction = (
-            "Create a recipe title and a recipe using the following ingredients: "
-            "{ingredients}. Start the response with 'Title: ', followed by the recipe title. "
-            "After the title, add the recipe steps starting with 'Recipe: '."
-            "Do not add the numbers. Only add the linebreaks."
-            "Here are some specific instructions that must be kept in mind when generating it: {details}"
-            "I want the recipe to be {preference} cuisine."
-            "The recipe is for {portions}, do the recipe with portions for that amount of people."
-        ).format(ingredients=ingredients_string, details=details, preference=preference, portions=portions)
+            f"Create a recipe using the following ingredients: {ingredients}."
+            "Format the response in json with the following fields: title, steps."
+            "The steps field will be a list."
+            "Don't prepend numbers to each step, only add in the text."
+            f"Some details to keep in mind: {details}"
+            f"Cuisine: {preference}."
+            f"Portions: {portions}"
+            "Also, you must absolutely, positively return the recipe in json format."
+        )
 
         response = self._generate_response(instruction)
+        if response is None:
+            return None
         cleaned = self.validate_recipe(response)
 
         return cleaned
@@ -36,30 +39,28 @@ class OpenAIAdapter:
             model='gpt-3.5-turbo',
             max_tokens=500,
             temperature=0.5,
-            messages=messages
+            messages=messages,
+            response_format={"type": "json_object"},
         )
+
+        if response.choices[0].finish_reason != "stop":
+            return None
+
         recipe_text = response.choices[0].message.content if response.choices else ""
 
         return recipe_text
 
     def validate_recipe(self, api_response):
-        # Intenta extraer el título y la receta según el formato esperado
-        parts = api_response.split('Recipe:')
-        if len(parts) < 2 or not parts[0] or not parts[1]:
+        import json
+        try:
+            recipe = json.loads(api_response)
+        except json.JSONDecodeError:
             return None
 
-        title = parts[0].replace('Title:', '').strip()
-        description = parts[1].strip()
+        title = recipe["title"]
+        steps = recipe["steps"]
 
-        if not title or not description:
-            return None
-
-        # Split steps using the linebreaks ('\n').
-        description = description.splitlines()
-        # But clean them, anyway.
-        description = [step for step in description if len(step) > 2]
-
-        return {'title': title, 'description': description}
+        return {'title': title, 'description': steps}
 
     def generate_image(self, recipe_id):
         recipe = Recipe.objects.get(id=recipe_id)
