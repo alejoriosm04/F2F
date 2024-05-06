@@ -19,11 +19,12 @@ def generate_recipe(request):
         portions = cd['portions']
         # TODO: Add the timestamp to the database.
 
-        user_ingredients = list(Ingredient.objects.filter(user=user).values_list('name', flat=True))
+        user_ingredients = list(Ingredient.objects.filter(user=user))
         if not user_ingredients:
             return render(request, "recipe.html", {"recipe": None, "error_message": "User has no ingredients."})
 
-        unchanged_user_ingredients = user_ingredients
+        unchanged_user_ingredients = [i.name for i in user_ingredients]
+        user_ingredients = [i.full_name for i in user_ingredients]
         user_ingredients = ', '.join(user_ingredients)
         adapter = OpenAIAdapter()
         recipe = adapter.generate_response_sync(user_ingredients, details, preference, portions)

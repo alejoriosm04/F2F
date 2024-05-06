@@ -15,6 +15,10 @@ class Ingredient(models.Model):
     quantity = models.PositiveSmallIntegerField(default=1)
     unit = models.CharField(max_length=2, choices=UNIT_CHOICES, default="u")
 
+    @property
+    def full_name(self):
+        return f"{self.name} ({self.quantity} {self.get_unit_display()})"
+
 
 class RecipeHadIngredient(models.Model):
     recipe_id = models.ForeignKey(Recipe, on_delete=models.DO_NOTHING)
