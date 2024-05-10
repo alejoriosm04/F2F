@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Lifestyle Recommendation{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="h1 pretty">Lifestyle Recommendation</h1>
+    <p class="lead">Based on your cooking habits and preferences, here's something just for you:</p>
+    
+    <!-- Display the recommendation -->
+    {% if recommendation %}
+        <div class="recommendation-content">
+            <h3>Dietary Tips</h3>
+            <ul>
+            {% for tip in recommendation.lifestyle_recommendations.dietary_tips %}
+                <li>{{ tip }}</li>
+            {% endfor %}
+            </ul>
+
+            <h3>Cooking Practices</h3>
+            <ul>
+            {% for practice in recommendation.lifestyle_recommendations.cooking_practices %}
+                <li>{{ practice }}</li>
+            {% endfor %}
+            </ul>
+
+            <h3>Cuisines to Explore</h3>
+            <ul>
+            {% for cuisine in recommendation.lifestyle_recommendations.cuisines_to_explore %}
+                <li>{{ cuisine }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p class="text-warning">We could not find any new recommendations for you at this time. Please check back later.</p>
+    {% endif %}
+
+    <a href="{% url 'statistics_overview' %}" class="btn btn-primary mt-3">Go Back to Dashboard</a>
+</div>
+{% endblock %}
