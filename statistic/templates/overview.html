@@ -7,8 +7,18 @@
     <h1 class="h1 pretty">Dashboard Overview - FTF</h1>
     <br>
     <h4 class="fw-normal">Hello, {{ first_name }}! Curious about your kitchen habits?</h4>
-    <p class="lead fw-light">Dive into your personalized statistics page to uncover fascinating insights about your most used ingredients and how your meal planning varies throughout the week.</p>
-    <br><br><br>
+    <p class="lead fw-light">Dive into your personalized statistics page to uncover fascinating insights about your most used ingredients and how your meal planning varies throughout the week with AI-Driven insights.</p>
+    <br><br>
+
+    <div class="mb-5">
+      <h2>Enhance Your Diet with AI-Driven Insights ✨</h2>
+      <!-- Recommendation Button -->
+      {% if can_request_recommendation %}
+        <a href="{% url 'generate-recommendation' %}" class="btn btn-primary">Get Lifestyle Recommendation</a>
+      {% else %}
+        <p class="lead fw-light">Your next recommendation will be available in <strong> {{ days_until_next_recommendation }} days. </strong></p>
+      {% endif %}
+    </div>
 
     <!-- Display Most Used Ingredients -->
     <div class="mb-3">

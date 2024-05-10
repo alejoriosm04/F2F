@@ -8,4 +8,4 @@ class Report(models.Model):
     report_info = models.TextField()
 
     def __str__(self):
-        return f'Report for {self.user.username} on {self.recommendation_date}'
+        return f'Report for {self.user.username} on {self.report_date}'
