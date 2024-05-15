@@ -58,10 +58,10 @@ document.querySelector('button#get-image')
 </ol>
 <!-- Since we are just using around 100 tokens, the response might get cut off. -->
 <p class="fs-1">…</p>
-<div class="container mb-4">
+<div class="container mb-4 col-sm-5">
 <button id="get-image" class="button-85" data-id="{{ recipe.id }}">Generate image</button>
 <p id="loading" hidden>Loading, please wait…</p>
-<img id="image" hidden class="img-fluid" alt="AI-generated image of the recipe.">
+<img id="image" hidden style="max-width:100%;height:auto;" class="img-fluid" alt="AI-generated image of the recipe.">
 </div>
 <a type="button" class="btn btn-another-recipe text-decoration-none" href="{% url 'home' %}">Generate another recipe</a>
 {% endif %}

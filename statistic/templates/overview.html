@@ -3,6 +3,7 @@
 {% block title %}Report{% endblock title %}
 
 {% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <div class="container mt-4">
     <h1 class="h1 pretty">Dashboard Overview - FTF</h1>
     <br>
@@ -24,14 +25,14 @@
     <div class="mb-3">
       <h2>Most Used Ingredients</h2>
       <p class="lead fw-light">A visual snapshot of the ingredients you turn to most often in your culinary adventures.</p>
-      <img src="data:image/png;base64,{{ ingredients_image_base64 }}" alt="Most Used Ingredients" style="width:100%; height:auto;">
+      <img src="data:image/png;base64,{{ ingredients_image_base64 }}" style="width:100%; height:auto;" alt="Most Used Ingredients" >
     </div>
 
     <!-- Display Requests per Day of the Week -->
     <div>
       <h2>Requests per Day of the Week</h2>
       <p class="lead fw-light">Ever wonder which days you're most likely to be bustling in the kitchen? A clear visual representation of when you're cooking the most.</p>
-      <img src="data:image/png;base64,{{ daily_stats_image_base64 }}" alt="Requests per Day of the Week" style="width:100%; height:auto;">
+      <img src="data:image/png;base64,{{ daily_stats_image_base64 }}" style="width:100%; height:auto;" alt="Requests per Day of the Week" >
     </div>
   </div>
 {% endblock %}
