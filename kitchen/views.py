@@ -19,7 +19,7 @@ def index(request):
 
 @login_required
 def list_ingredients(request):
-    ingredients = Ingredient.objects.filter(user=request.user)
+    ingredients = Ingredient.objects.filter(user=request.user).order_by('-created_at')
     return render(request, "list_ingredients.html", {"ingredients": ingredients})
 
 @login_required

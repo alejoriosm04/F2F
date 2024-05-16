@@ -3,7 +3,7 @@
 {% block content %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="signup-wrapper py-5">
-  <h2 class="text-center mb-4 animated-title">Create Your Account</h2>
+  <h2 class="text-center mb-4 animated-title text">Create Your Account</h2>
   <form method="post" class="g-3 needs-validation form-stylish" novalidate>
     {% csrf_token %}
     <div class="row">
@@ -21,9 +21,9 @@
       {% endfor %}
     </div>
     <div class="text-center">
-      <button type="submit" class="btn btn-lg btn-register">Sign Up</button>
+      <button type="submit" class="btn btn-lg btn-register form-text">Sign Up</button>
     </div>
-    <div class="alert" role="alert">
+    <div class="alert form-text" role="alert">
       Already have an account? <a href="{% url 'login' %}">Log in your account</a>
     </div>
   </form>

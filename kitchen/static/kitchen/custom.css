@@ -8,16 +8,43 @@
   --ftf-gold-shadow: #ad8224;
   --ftf-orange: #f58243;
   --ftf-orange-shadow: #c97446;
+  --ftf-primary-color: #fde4ce;
+  --ftf-secondary-color:#1e2e2b;
 
   /* Overriding Bootstrap colors */
   --bs-primary: var(--ftf-purple);
   --bs-primary-rgb: var(--ftf-purple);
   --bs-body-color: var(--ftf-gold);
+  --primary-form-label-color:--ftf-secondary-color;
+  --primary-lead-color: var(--ftf-dark-green);
+  --primary-bottom-color: var(--ftf-dark-green);
+  --primary-nav-link-color: var(--ftf-dark-green);
+  --primary-heading-color: var(--ftf-dark-green);
+  --form-text-color:var(--ftf-dark-green)
+}
+
+.dark-theme{
+  --ftf-primary-color: #0D1117;
+  --ftf-secondary-color:#fde4ce;
+  --primary-form-label-color: var(--ftf-secondary-color);
+  --primary-lead-color: var(--ftf-light-orange);
+  --primary-bottom-color: var(--ftf-light-orange);
+  --primary-nav-link-color: var(--ftf-light-orange);
+  --primary-heading-color: var(--ftf-orange-shadow);
+  --form-text-color: var(--ftf-light-orange);
+
+}
+
+#icon {
+  width: 40px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 body {
-  background-color: var(--ftf-light-orange);
-  --bs-body-color: var(--ftf-dark-green);
+  background-color: var(--ftf-primary-color);
+  --bs-body-color:--ftf-dark-green;
   --bs-body-font-family: "Montserrat", "Glory", var(--bs-font-sans-serif);
 }
 
@@ -45,3 +72,37 @@ h1.pretty {
   --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
 }
 
+.form-label {
+  color: var(--primary-form-label-color);
+}
+
+p.lead{
+  color: var(--primary-lead-color);
+}
+
+p.fs-6{
+  color: var(--primary-bottom-color);
+}
+
+.nav-link{
+  color: var(--primary-nav-link-color);
+}
+
+.accent-color{
+  color:var(--primary-heading-color);
+}
+
+.form-text, h2.text, .current, .recommendation-content, .apply-mode{
+  color: var(--form-text-color);
+}
+
+.navbar-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.navbar-text form {
+  margin-right: 30px; /* Ajusta este valor según tus necesidades */
+}
