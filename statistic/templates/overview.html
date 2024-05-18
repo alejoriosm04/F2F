@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Report{% endblock title %}
+{% block title %}Statistics{% endblock title %}
+
+{% block styles %}
+<link href="{% static "statistic/overview.css" %}" rel="stylesheet">
+{% endblock styles %}
 
 {% block content %}
   <div class="container mt-4">
@@ -12,10 +17,11 @@
 
     <div class="mb-5">
       <h2>Enhance Your Diet with AI-Driven Insights ✨</h2>
+      <br>
       <!-- Recommendation Button -->
       {% if can_request_recommendation %}
-        <a href="{% url 'generate-recommendation' %}" class="btn btn-primary">Get Lifestyle Recommendation</a>
-      {% else %}
+        <button class="button-85" onclick="location.href='{% url 'generate-recommendation' %}'">Generate AI Insights</button>
+        {% else %}
         <p class="lead fw-light">Your next recommendation will be available in <strong> {{ days_until_next_recommendation }} days. </strong></p>
       {% endif %}
     </div>
