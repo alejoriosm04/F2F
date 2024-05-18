@@ -99,9 +99,11 @@
         document.addEventListener('DOMContentLoaded', (event) => {
         var icon = document.getElementById("icon");
         if (localStorage.getItem('darkTheme') === 'true') {
+            document.documentElement.setAttribute("data-bs-theme", "dark");
             document.body.classList.add("dark-theme");
             icon.src = "{% static 'kitchen/sun.png' %}";
         } else {
+            document.documentElement.setAttribute("data-bs-theme", "light");
             document.body.classList.remove("dark-theme");
             icon.src = "{% static 'kitchen/moon.png' %}";
         }
@@ -110,9 +112,11 @@
             document.body.classList.toggle("dark-theme");
             // Al hacer clic, alterna el estado y actualiza `localStorage`.
             if (document.body.classList.contains("dark-theme")) {
+                document.documentElement.setAttribute("data-bs-theme", "dark");
                 localStorage.setItem('darkTheme', 'true');
                 icon.src = "{% static 'kitchen/sun.png' %}";
             } else {
+                document.documentElement.setAttribute("data-bs-theme", "light");
                 localStorage.setItem('darkTheme', 'false');
                 icon.src = "{% static 'kitchen/moon.png' %}";
             }
