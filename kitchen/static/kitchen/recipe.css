@@ -14,6 +14,12 @@
   touch-action: manipulation;
 }
 
+#icon {
+  width: 30px;
+  cursor: pointer;
+}
+
+
 .button-85:before {
   content: "";
   background: linear-gradient(
@@ -75,3 +81,4 @@
   --bs-btn-hover-bg: var(--ftf-orange-shadow);
   --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
 }
+

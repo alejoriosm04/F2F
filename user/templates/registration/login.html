@@ -14,12 +14,12 @@
     {% endif %}
     <form action="{% url 'login' %}" method="post">
       <div class="mb-3">
-        <label for="id_username" class="form-label">Email address</label>
+        <label for="id_username" class="form-label-login" >Email address</label>
         <input type="email" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150"
           required id="id_username" class="form-control">
       </div>
       <div class="mb-3">
-        <label for="id_password" class="form-label">Password</label>
+        <label for="id_password" class="form-label-login" class="login">Password</label>
         <input type="password" name="password" autocomplete="current-password" required id="id_password"
           class="form-control">
       </div>
