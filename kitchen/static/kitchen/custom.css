@@ -20,7 +20,8 @@
   --primary-bottom-color: var(--ftf-dark-green);
   --primary-nav-link-color: var(--ftf-dark-green);
   --primary-heading-color: var(--ftf-dark-green);
-  --form-text-color:var(--ftf-dark-green)
+  --form-text-color:var(--ftf-dark-green);
+  --ftf-recipe-history-title: var(--ftf-purple);
 }
 
 .dark-theme{
@@ -32,7 +33,7 @@
   --primary-nav-link-color: var(--ftf-light-orange);
   --primary-heading-color: var(--ftf-orange-shadow);
   --form-text-color: var(--ftf-light-orange);
-
+  --ftf-recipe-history-title: var(--ftf-gold);
 }
 
 #icon {
@@ -49,7 +50,7 @@ body {
 }
 
 a.history {
-  color: var(--ftf-purple);
+  color: var(--ftf-recipe-history-title);
 }
 
 h1.pretty {
