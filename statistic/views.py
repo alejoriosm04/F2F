@@ -42,7 +42,7 @@ def overview(request):
     # Most Used Ingredients
     most_used_ingredients = RecipeHadIngredient.objects.filter(recipe_id__user=user).values('ingredient_name').annotate(total=Count('ingredient_name')).order_by('-total')[:10]
     ingredients = [ingredient['ingredient_name'] for ingredient in most_used_ingredients]
-    counts = [int(ingredient['total']) for ingredient in most_used_ingredients]  # Convert counts to integers
+    counts = [int(ingredient['total']) for ingredient in most_used_ingredients]
     colors = ['#812DAB', '#C39123', '#F58143', '#1E2E2B'] * 3
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 12), facecolor='none')
@@ -51,12 +51,12 @@ def overview(request):
     # Bar chart
     if ingredients and counts:
         ax1.barh(ingredients, counts, color=colors)
-        ax1.set_xlabel('Usage Count', fontsize=20)
-        ax1.set_title('Top 10 Most Used Ingredients', fontsize=20, weight='bold', color='#333333')
+        ax1.set_xlabel('Usage Count', fontsize=20, color='#f58243')
+        ax1.set_title('Top 10 Most Used Ingredients', fontsize=20, weight='bold', color='#f58243')
         ax1.invert_yaxis()
         ax1.xaxis.set_major_locator(ticker.MaxNLocator(integer=True))
-        ax1.tick_params(axis='x', labelsize=15)
-        ax1.tick_params(axis='y', labelsize=15)
+        ax1.tick_params(axis='x', labelsize=15, colors='#f58243')
+        ax1.tick_params(axis='y', labelsize=15, colors='#f58243')
 
     # Table
     table_data = [[ing, count] for ing, count in zip(ingredients, counts)]
@@ -66,7 +66,7 @@ def overview(request):
             colLabels=["Ingredient", "Usage Count"],
             cellLoc='center',
             loc='center',
-            colColours=['#F58143', '#F58143']
+            colColours=['#f58243', '#f58243']
         )
         the_table.auto_set_font_size(False)
         the_table.set_fontsize(20)
@@ -94,12 +94,12 @@ def overview(request):
     if totals:
         plt.figure(figsize=(10, 6), facecolor='none')
         plt.bar(days, totals, color=colors[:7], edgecolor='black')
-        plt.xlabel('Day of the Week', fontsize=15)
-        plt.ylabel('Number of Recipe Creations', fontsize=15)
-        plt.title('Recipe Creations per Day of the Week', fontsize=20, weight='bold', color='#333333')
+        plt.xlabel('Day of the Week', fontsize=15, color='#f58243')
+        plt.ylabel('Number of Recipe Creations', fontsize=15, color='#f58243')
+        plt.title('Recipe Creations per Day of the Week', fontsize=20, weight='bold', color='#f58243')
         plt.grid(True, linestyle='--', linewidth=0.5, color='grey', axis='y')
-        plt.tick_params(axis='x', labelsize=15)
-        plt.tick_params(axis='y', labelsize=15)
+        plt.tick_params(axis='x', labelsize=15, colors='#f58243')
+        plt.tick_params(axis='y', labelsize=15, colors='#f58243')
         plt.tight_layout()
 
         buf = io.BytesIO()
