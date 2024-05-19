@@ -11,7 +11,11 @@
 {% endif %}
 
 <!-- Create Ingredient Form -->
+{% if last_activity_time %}
+    <p>Última actividad en la cocina: {{ last_activity_time }}</p>
+{% endif %}
 <div class="card card-body mb-3">
+  
   <h2 class="text-center">Kitchen</h2>
   <form action="{% url 'kitchen:create' %}" method="POST">
     {% csrf_token %}
