@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Ingredient
+from .models import Ingredient, UserActivity
 from .forms import RecipeForm, IngredientForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -20,7 +20,8 @@ def index(request):
 @login_required
 def list_ingredients(request):
     ingredients = Ingredient.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, "list_ingredients.html", {"ingredients": ingredients})
+    last_activity_time = get_last_activity_time(request.user)
+    return render(request, "list_ingredients.html", {"ingredients": ingredients, "last_activity_time": last_activity_time})
 
 @login_required
 def create_ingredient(request):
@@ -35,6 +36,7 @@ def create_ingredient(request):
             )
         ingredient = Ingredient(name=new_name, user=request.user, quantity=quantity, unit=unit)
         ingredient.save()
+        UserActivity.objects.create(user=request.user, activity_type=f"Added ingredient {ingredient.name}")
         return redirect("/kitchen/")
     else:
         return redirect("/kitchen/")
@@ -42,8 +44,13 @@ def create_ingredient(request):
 @login_required
 def delete_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(id=ingredient_id)
+    UserActivity.objects.create(user=request.user, activity_type=f"Deleted ingredient {ingredient.name}")
     ingredient.delete()
     return redirect("/kitchen/")
+
+def get_last_activity_time(user):
+    last_activity = UserActivity.objects.filter(user=user).order_by('-activity_time').first()
+    return last_activity.activity_time if last_activity else None
 
 
 from django.utils.decorators import method_decorator
@@ -54,6 +61,12 @@ class IngredientEditView(UpdateView):
     template = ["ingredient"]
     fields = ["name", "quantity", "unit"]
     template_name_suffix = "_edit_form"
+
+    def form_valid(self, form):
+        # Registrar la actividad antes de guardar los cambios
+        UserActivity.objects.create(user=self.request.user, activity_type=f"Edited ingredient {form.instance.name}")
+        return super().form_valid(form)
+
 
     def get_success_url(self):
         return reverse("kitchen:list")
