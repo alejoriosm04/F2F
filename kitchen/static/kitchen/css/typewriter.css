@@ -1,0 +1,23 @@
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    50% { border-color: transparent; }
+}
+
+.typewriter h2 {
+    color: #f58243;
+    font-family: 'Glory';
+    font-weight: 800;
+    overflow: hidden;
+    border-right: .15em solid orange;  /* Caret color */
+    white-space: nowrap;
+    margin: 0 auto; /* Centers the text */
+    padding: 10px 0; /* Reduces vertical spacing */
+    letter-spacing: .05em;
+    animation:
+    typing 3.5s steps(40, end) forwards, /* 'forwards' keeps the text at final state */
+    blink-caret .75s step-end infinite;
+}
