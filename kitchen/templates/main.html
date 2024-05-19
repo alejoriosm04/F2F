@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Welcome to FridgeToFeast{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="pretty display-4">Welcome to FridgeToFeast</h1>
+    <p class="lead mt-3">Discover the best recipes based on what's in your fridge right now!</p>
+    <div class="mt-4">
+        <a href="{% url 'login' %}" class="btn btn-primary me-2">Log In</a>
+        <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
+    </div>
+</div>
+{% endblock %}

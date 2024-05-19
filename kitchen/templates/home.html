@@ -4,6 +4,31 @@
 {% load django_bootstrap5 %}
 {% block styles %}
 <link href="{% static "kitchen/reminder.css" %}" rel="stylesheet">
+<style>
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes blink-caret {
+    50% { border-color: transparent; }
+  }
+
+  .typewriter h2 {
+    color: #f58243;
+    font-family: 'Glory';
+    font-weight: 800;
+    overflow: hidden;
+    border-right: .15em solid orange;  /* Caret color */
+    white-space: nowrap;
+    margin: 0 auto; /* Centers the text */
+    padding: 10px 0; /* Reduces vertical spacing */
+    letter-spacing: .05em;
+    animation: 
+      typing 3.5s steps(40, end) forwards, /* 'forwards' keeps the text at final state */
+      blink-caret .75s step-end infinite;
+  }
+</style>
 {% endblock %}
 
 {% block title %}Home{% endblock %}
@@ -11,6 +36,11 @@
 {% block content %}
 <h1 class="h1 pretty">FridgeToFeast</h1>
 <p class="lead">Make the most of your food.</p>
+<!-- Typewriter effect prompt -->
+<div class="typewriter">
+    <h2>What delicious dish can we help you cook today? Let's start</h2>
+</div>
+<br>
 <form method="post">
   {% csrf_token %}
   {% bootstrap_form form %}
@@ -19,22 +49,21 @@
 
 {% if show_modal %}
 <div id="miModal" class="modal">
-  <!-- Contenido del modal -->
+  <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
     <p>Remember to update your kitchen, to cook the most delicious recipes with fresh ingredients.</p>
-    <!-- Botón que lleva al usuario a la página de la cocina -->
+    <!-- Button that takes the user to the kitchen page -->
     <button onclick="window.location='{% url 'kitchen:list' %}';"  id="updateReminder" class="btn btn-primary">Go to kitchen</button>
   </div>
 </div>
 {% endif %}
 {% endblock %}
 
-
 {% block scripts %}
 <script>
   {% if show_modal %}
-  // Aquí el código JavaScript para mostrar el modal
+  // JavaScript code for displaying the modal
   window.onload = function() {
     var modal = document.getElementById('miModal');
     var span = document.getElementsByClassName("close")[0];
@@ -51,11 +80,7 @@
             modal.style.display = "none";
         }
     }
-
-    reminderText.onclick = function() {
-      window.location.href = "{% url 'kitchen:list' %}";
-  }
   };
   {% endif %}
-  </script>
+</script>
 {% endblock %}

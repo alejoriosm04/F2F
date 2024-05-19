@@ -4,7 +4,7 @@ from .models import Ingredient
 
 class RecipeForm(forms.Form):
   details = forms.CharField(
-    widget=forms.TextInput(attrs={'placeholder': 'E.g. "20 minutes to prepare", "for a celebration", etc.'}),
+    widget=forms.TextInput(attrs={'placeholder': 'E.g. "Quick lunch under 30 minutes", "gluten-free dinner ideas", "desserts for a birthday party", etc.'}),
     max_length=100,
     required=False,
     label="Any specific requests? (preparation time, length, complexity, etc.)",
