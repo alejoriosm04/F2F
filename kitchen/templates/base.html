@@ -41,7 +41,7 @@
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
-          <img src="{% static "kitchen/isotype-100x100.png" %}" width="50" class="d-inline-block align-text-middle" alt="Logo">
+          <img src="{% static "kitchen/icon/isotype-100x100.png" %}" width="50" class="d-inline-block align-text-middle" alt="Logo">
         </a>
         {% if request.user.is_authenticated %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
               <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
             </form>
           </span>
-          <img src="{% static "kitchen/moon.png" %}"  alt="Darkmode" id="icon">
+          <img src="{% static "kitchen/icon/moon.png" %}"  alt="Darkmode" id="icon">
         </div>
         {% endif %}
       </div>
@@ -102,11 +102,11 @@
         if (localStorage.getItem('darkTheme') === 'true') {
             document.documentElement.setAttribute("data-bs-theme", "dark");
             document.body.classList.add("dark-theme");
-            icon.src = "{% static 'kitchen/sun.png' %}";
+            icon.src = "{% static 'kitchen/icon/sun.png' %}";
         } else {
             document.documentElement.setAttribute("data-bs-theme", "light");
             document.body.classList.remove("dark-theme");
-            icon.src = "{% static 'kitchen/moon.png' %}";
+            icon.src = "{% static 'kitchen/icon/moon.png' %}";
         }
 
         icon.onclick = function() {
@@ -115,11 +115,11 @@
             if (document.body.classList.contains("dark-theme")) {
                 document.documentElement.setAttribute("data-bs-theme", "dark");
                 localStorage.setItem('darkTheme', 'true');
-                icon.src = "{% static 'kitchen/sun.png' %}";
+                icon.src = "{% static 'kitchen/icon/sun.png' %}";
             } else {
                 document.documentElement.setAttribute("data-bs-theme", "light");
                 localStorage.setItem('darkTheme', 'false');
-                icon.src = "{% static 'kitchen/moon.png' %}";
+                icon.src = "{% static 'kitchen/icon/moon.png' %}";
             }
         };
     });
