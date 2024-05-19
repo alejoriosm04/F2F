@@ -48,19 +48,19 @@ document.querySelector('button#get-image')
 {{ error_message }}
 </div>
 {% else %}
-<h1 class="mt5">
+<h1 class="mt5 form-label">
 {{ recipe.title }}
 </h1>
-<ol>
+<ol class="form-label">
 {% for step in recipe.description %}
 <li>{{ step }}</li>
 {% endfor %}
 </ol>
 <!-- Since we are just using around 100 tokens, the response might get cut off. -->
-<p class="fs-1">…</p>
-<div class="container mb-4">
+<p class="fs-1 form-label">…</p>
+<div class="container mb-4 col-sm-5">
 <button id="get-image" class="button-85" data-id="{{ recipe.id }}">Generate image</button>
-<p id="loading" hidden>Loading, please wait…</p>
+<p class="form-label" id="loading" hidden>Loading, please wait…</p>
 <img id="image" hidden class="img-fluid" alt="AI-generated image of the recipe.">
 </div>
 <a type="button" class="btn btn-another-recipe text-decoration-none" href="{% url 'home' %}">Generate another recipe</a>

@@ -2,41 +2,41 @@
 
 {% block title %}Log-in{% endblock title %}
 
-{% block content %}
-<div class="card mx-auto p-3" style="width: 400px;">
-  <h1>Log-in</h1>
-  {% if form.errors %}
-  <p>
-    Your username and password didn't match.
-    Please try again.
-  </p>
-  {% endif %}
-  <form action="{% url 'login' %}" method="post">
-    <div class="mb-3">
-      <label for="id_username" class="form-label">Email address</label>
-      <input type="email" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username"
-        class="form-control">
+  {% block content %}
+  <div class="card mx-auto p-3" style="width: 400px;">
+    <h1>Log-in</h1>
+    {% if form.errors %}
+    <p>
+      Your username and password didn't match.
+      Please try again.
+    </p>
+    {% endif %}
+    <form action="{% url 'login' %}" method="post">
+      <div class="mb-3">
+        <label for="id_username" class="form-label-login" >Email address</label>
+        <input type="email" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150"
+          required id="id_username" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="id_password" class="form-label-login" class="login">Password</label>
+        <input type="password" name="password" autocomplete="current-password" required id="id_password"
+          class="form-control">
+      </div>
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <p><input type="submit" class="btn btn-primary" value="Log in"></p>
+    </form>
+    <div class="alert" role="alert">
+      Don't have an account yet? <a href="{% url 'register' %}">Create an account</a>
     </div>
-    <div class="mb-3">
-      <label for="id_password" class="form-label">Password</label>
-      <input type="password" name="password" autocomplete="current-password" required id="id_password"
-        class="form-control">
+    {% if debug %}
+    <div class="alert" role="alert">
+      Use these <i>(temporary)</i> credentials:
+      <ul>
+        <li><b>Email address:</b> admin@example.org</li>
+        <li><b>Password:</b> admin</li>
+      </ul>
     </div>
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}" />
-    <p><input type="submit" class="btn btn-primary" value="Log in"></p>
-  </form>
-  <div class="alert" role="alert">
-    Don't have an account yet? <a href="{% url 'register' %}">Create an account</a>
+    {% endif %}
   </div>
-  {% if debug %}
-  <div class="alert" role="alert">
-    Use these <i>(temporary)</i> credentials:
-    <ul>
-      <li><b>Email address:</b> admin@example.org</li>
-      <li><b>Password:</b> admin</li>
-    </ul>
-  </div>
-  {% endif %}
-</div>
-{% endblock content %}
+  {% endblock content %}
