@@ -3,10 +3,6 @@
 
 {% block title %}Generated recipe{% endblock title %}
 
-{% block styles %}
-<link href="{% static "kitchen/recipe.css" %}" rel="stylesheet">
-{% endblock styles %}
-
 {% block domready %}
 const url = '{% url "recipe:get_image" %}';
 var options = {

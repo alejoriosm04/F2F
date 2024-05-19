@@ -59,20 +59,6 @@ h1.pretty {
   font-weight: 800;
 }
 
-.btn-primary {
-  --bs-btn-bg: var(--ftf-purple);
-  --bs-btn-border-color: var(--bs-btn-bg);
-  --bs-btn-hover-bg: var(--ftf-purple-shadow);
-  --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
-}
-
-.btn-secondary {
-  --bs-btn-bg: var(--ftf-gold);
-  --bs-btn-border-color: var(--bs-btn-bg);
-  --bs-btn-hover-bg: var(--ftf-gold-shadow);
-  --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
-}
-
 .form-label {
   color: var(--primary-form-label-color);
 }

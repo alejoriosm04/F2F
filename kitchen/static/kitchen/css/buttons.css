@@ -14,12 +14,6 @@
   touch-action: manipulation;
 }
 
-#icon {
-  width: 30px;
-  cursor: pointer;
-}
-
-
 .button-85:before {
   content: "";
   background: linear-gradient(
@@ -73,6 +67,20 @@
 }
 /* End of button-85 */
 
+.btn-primary {
+  --bs-btn-bg: var(--ftf-purple);
+  --bs-btn-border-color: var(--bs-btn-bg);
+  --bs-btn-hover-bg: var(--ftf-purple-shadow);
+  --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+}
+
+.btn-secondary {
+  --bs-btn-bg: var(--ftf-gold);
+  --bs-btn-border-color: var(--bs-btn-bg);
+  --bs-btn-hover-bg: var(--ftf-gold-shadow);
+  --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+}
+
 .btn-another-recipe {
   --bs-btn-color: var(--bs-white);
   --bs-btn-bg: var(--ftf-orange);
@@ -81,4 +89,3 @@
   --bs-btn-hover-bg: var(--ftf-orange-shadow);
   --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
 }
-
