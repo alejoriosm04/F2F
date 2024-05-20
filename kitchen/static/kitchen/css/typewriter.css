@@ -17,7 +17,17 @@
     margin: 0 auto; /* Centers the text */
     padding: 10px 0; /* Reduces vertical spacing */
     letter-spacing: .05em;
-    animation:
-    typing 3.5s steps(40, end) forwards, /* 'forwards' keeps the text at final state */
-    blink-caret .75s step-end infinite;
+    animation: typing 3.5s steps(40, end) forwards, /* 'forwards' keeps the text at final state */
+               blink-caret .75s step-end infinite;
+}
+
+/* Responsive Styles */
+@media (max-width: 1400px) {
+    .typewriter h2 {
+        white-space: normal; /* Allow text to wrap */
+        overflow: visible; /* Allow overflow for wrapped text */
+        display: inline-block;
+        border-right: none; /* Remove the original caret */
+        animation: none; /* Disable original typing animation */
+    }
 }
