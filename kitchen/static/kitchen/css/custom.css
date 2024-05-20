@@ -24,7 +24,7 @@
   --ftf-recipe-history-title: var(--ftf-purple);
 }
 
-.dark-theme{
+[data-bs-theme="dark"] {
   --ftf-primary-color: #0D1117;
   --ftf-secondary-color:#fde4ce;
   --primary-form-label-color: var(--ftf-secondary-color);

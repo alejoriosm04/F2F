@@ -3,6 +3,34 @@
 <html lang="en">
 
 <head>
+  <script>
+    /* Helper functions. */
+    const getStoredTheme = () => localStorage.getItem('theme');
+    const setStoredTheme = (theme) => localStorage.setItem('theme', theme);
+
+    const switchColorsOnly = (theme) => {
+        setStoredTheme(theme);
+        document.documentElement.setAttribute('data-bs-theme', theme);
+    };
+    const switchIcon = (theme, icon) => {
+        icon.src = theme === 'dark' ? '{% static 'kitchen/icon/sun.png' %}' : '{% static 'kitchen/icon/moon.png' %}';
+    };
+
+    var initialTheme = getStoredTheme();
+    switchColorsOnly(initialTheme);  /* Before DOM loads. */
+
+    document.addEventListener('DOMContentLoaded', () => {
+        /* Update icon after DOM loads. */
+        var icon = document.getElementById('icon');
+        switchIcon(initialTheme, icon);
+
+        icon.onclick = function() {
+            theme = getStoredTheme() === 'dark' ? 'light': 'dark';
+            switchColorsOnly(theme);
+            switchIcon(theme, icon);
+        };
+    });
+  </script>
   <title>FridgeToFeast - {% block title %}{% endblock %}</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -97,34 +125,6 @@
   <div id="notification-panel" style="display: none;">
     <!-- Aquí se agregarán las notificaciones dinámicamente -->
   </div>
-  <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-        var icon = document.getElementById("icon");
-        if (localStorage.getItem('darkTheme') === 'true') {
-            document.documentElement.setAttribute("data-bs-theme", "dark");
-            document.body.classList.add("dark-theme");
-            icon.src = "{% static 'kitchen/icon/sun.png' %}";
-        } else {
-            document.documentElement.setAttribute("data-bs-theme", "light");
-            document.body.classList.remove("dark-theme");
-            icon.src = "{% static 'kitchen/icon/moon.png' %}";
-        }
-
-        icon.onclick = function() {
-            document.body.classList.toggle("dark-theme");
-            // Al hacer clic, alterna el estado y actualiza `localStorage`.
-            if (document.body.classList.contains("dark-theme")) {
-                document.documentElement.setAttribute("data-bs-theme", "dark");
-                localStorage.setItem('darkTheme', 'true');
-                icon.src = "{% static 'kitchen/icon/sun.png' %}";
-            } else {
-                document.documentElement.setAttribute("data-bs-theme", "light");
-                localStorage.setItem('darkTheme', 'false');
-                icon.src = "{% static 'kitchen/icon/moon.png' %}";
-            }
-        };
-    });
-  </script>
   <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
