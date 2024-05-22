@@ -72,9 +72,6 @@
           <img src="{% static "kitchen/icon/isotype-100x100.png" %}" width="50" class="d-inline-block align-text-middle" alt="Logo">
         </a>
         {% if request.user.is_authenticated %}
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -96,10 +93,14 @@
               <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
             </form>
           </span>
-          
+          {% endif %}
         </div>
-        {% endif %}
-        <img src="{% static "kitchen/icon/moon.png" %}"  alt="Darkmode" id="icon">
+        <div class="d-inline-flex">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <img class="ms-2" src="{% static "kitchen/icon/moon.png" %}"  alt="Darkmode" id="icon">
+        </div>
       </div>
     </nav>
   </div>
