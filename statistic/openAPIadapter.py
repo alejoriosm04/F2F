@@ -1,7 +1,8 @@
-import os
 import json
-from openai import OpenAI
+import os
+
 from django.conf import settings
+from openai import OpenAI
 
 
 class OpenAIAdapter:

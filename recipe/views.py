@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
-from .openAPIadapter import OpenAIAdapter
-from kitchen.models import Ingredient, RecipeHadIngredient
-from .models import Recipe
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
+from django.views.decorators.http import require_POST
+
 from kitchen.forms import RecipeForm
+from kitchen.models import Ingredient, RecipeHadIngredient
+
+from .models import Recipe
+from .openAPIadapter import OpenAIAdapter
 
 
 @login_required

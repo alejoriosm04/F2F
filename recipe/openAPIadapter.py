@@ -1,6 +1,8 @@
-from openai import OpenAI
 import os
+
 from django.conf import settings
+from openai import OpenAI
+
 from .models import Recipe
 
 

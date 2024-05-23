@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from .forms import UserRegistrationForm, LoginForm
 from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
+
+from .forms import LoginForm, UserRegistrationForm
 
 
 class CustomLoginView(LoginView):

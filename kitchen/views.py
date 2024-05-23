@@ -1,14 +1,12 @@
-from django.shortcuts import render
-
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from .models import Ingredient, UserActivity
-from .forms import RecipeForm, IngredientForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.views.decorators.http import require_GET
 
 from recipe.views import generate_recipe
+
+from .forms import IngredientForm, RecipeForm
+from .models import Ingredient, UserActivity
 
 
 def main(request):

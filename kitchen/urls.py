@@ -2,7 +2,6 @@ from django.urls import path
 
 from . import views
 
-
 app_name = "kitchen"
 urlpatterns = [
     path("", views.list_ingredients, name="list"),

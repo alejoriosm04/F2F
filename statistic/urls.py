@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import overview, generate_recommendation
+
+from .views import generate_recommendation, overview
 
 urlpatterns = [
     path("overview/", overview, name="statistics_overview"),

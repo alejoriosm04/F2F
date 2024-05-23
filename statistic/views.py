@@ -1,22 +1,23 @@
-import io
 import base64
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from matplotlib import pyplot as plt
-from kitchen.models import Ingredient, RecipeHadIngredient
-from recipe.models import Recipe
-from django.db.models.functions import ExtractWeekDay
-from django.db.models import Count
-from .openAPIadapter import OpenAIAdapter
-from .models import Report
-from django.utils.timezone import now, timedelta
+import io
 import json
-
 
 # Use a non-interactive Matplotlib backend to prevent a runtime error from
 # starting a Matplotlib GUI outside of main thread.
 # See also: https://stackoverflow.com/q/69924881
 import matplotlib
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from django.db.models.functions import ExtractWeekDay
+from django.shortcuts import redirect, render
+from django.utils.timezone import now, timedelta
+from matplotlib import pyplot as plt
+
+from kitchen.models import Ingredient, RecipeHadIngredient
+from recipe.models import Recipe
+
+from .models import Report
+from .openAPIadapter import OpenAIAdapter
 
 matplotlib.use("agg")
 
