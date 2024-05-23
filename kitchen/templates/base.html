@@ -65,7 +65,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{% url 'home' %}">
-                        <img src="{% static "kitchen/icon/isotype-100x100.png" %}" width="50" class="d-inline-block align-text-middle" alt="Logo">
+                        <img src="{% static "kitchen/icon/isotype-100x100.png" %}" width="50" height="50" class="d-inline-block align-text-middle" alt="Logo">
                     </a>
                     {% if request.user.is_authenticated %}
                         <div class="collapse navbar-collapse" id="navbarText">
@@ -103,7 +103,7 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                         {% endif %}
-                        <img class="ms-2" src="{% static "kitchen/icon/moon.png" %}"  alt="Darkmode" id="icon">
+                        <img class="ms-2" src="{% static "kitchen/icon/moon.png" %}" alt="Darkmode" id="icon">
                     </div>
                 </div>
             </nav>
@@ -124,7 +124,7 @@
                 <p class="fs-6 fw-light text-center">© 2024 FTF Team</p>
             </footer>
         </div>
-        <div id="notification-panel" style="display: none;">
+        <div id="notification-panel" class="notification">
             <!-- Aquí se agregarán las notificaciones dinámicamente -->
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>

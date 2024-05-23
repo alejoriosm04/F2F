@@ -38,6 +38,7 @@
 
 #icon {
   width: 40px;
+  height: 40px;
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
@@ -94,3 +95,18 @@ p.fs-6{
   margin-right: 30px; /* Ajusta este valor según tus necesidades */
 }
 
+.notification {
+  display: none;
+}
+
+.modal-close {
+  color: #1e2e2b;
+}
+
+.edit-form {
+  max-width: 500px;
+}
+
+.login-form {
+  max-width: 400px;
+}

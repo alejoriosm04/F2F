@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 {% block title %}
     Generated recipe
@@ -17,6 +17,8 @@
             <img id="image"
                  hidden
                  class="img-fluid"
+                 width="256"
+                 height="256"
                  alt="AI-generated image of the recipe.">
         </div>
         <a type="button"

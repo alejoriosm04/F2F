@@ -1,11 +1,13 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 {% load django_bootstrap5 %}
 {% block styles %}
     <link href="{% static "kitchen/css/reminder.css" %}" rel="stylesheet">
     <link href="{% static "kitchen/css/typewriter.css" %}" rel="stylesheet">
-{% endblock %}
-{% block title %}Home{% endblock %}
+{% endblock styles %}
+{% block title %}
+    Home
+{% endblock title %}
 {% block content %}
     <h1 class="h1 pretty">FridgeToFeast</h1>
     <p class="lead">Make the most of your food.</p>
@@ -25,10 +27,8 @@
         <div id="miModal" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <p style="color: #1e2e2b;">
-                    Remember to update your kitchen, to cook the most delicious recipes with fresh ingredients.
-                </p>
+                <span class="close">×</span>
+                <p class="modal-close">Remember to update your kitchen, to cook the most delicious recipes with fresh ingredients.</p>
                 <!-- Button that takes the user to the kitchen page -->
                 <button onclick="window.location='{% url 'kitchen:list' %}';"
                         id="updateReminder"
@@ -36,9 +36,9 @@
             </div>
         </div>
     {% endif %}
-{% endblock %}
+{% endblock content %}
 {% block scripts %}
     {% if show_modal %}
         <script src="{% static 'kitchen/js/reminder.js' %}"></script>
     {% endif %}
-{% endblock %}
+{% endblock scripts %}

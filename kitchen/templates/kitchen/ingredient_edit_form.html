@@ -1,9 +1,11 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 {% load django_bootstrap5 %}
-{% block title %}Edit ingredient{% endblock %}
+{% block title %}
+    Edit ingredient
+{% endblock title %}
 {% block content %}
-    <div class="container" style="max-width: 500px;">
+    <div class="container edit-form">
         <h1 class="h1 pretty">Edit ingredient</h1>
         <div class="card card-body">
             <form method="post">
@@ -13,4 +15,4 @@
             </form>
         </div>
     </div>
-{% endblock %}
+{% endblock content %}

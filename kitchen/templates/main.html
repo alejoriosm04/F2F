@@ -1,5 +1,7 @@
-{% extends 'base.html' %}
-{% block title %}Welcome to FridgeToFeast{% endblock %}
+{% extends "base.html" %}
+{% block title %}
+    Welcome to FridgeToFeast
+{% endblock title %}
 {% block content %}
     <div class="text-center mt-5">
         <h1 class="pretty display-4">Welcome to FridgeToFeast</h1>
@@ -9,4 +11,4 @@
             <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
         </div>
     </div>
-{% endblock %}
+{% endblock content %}

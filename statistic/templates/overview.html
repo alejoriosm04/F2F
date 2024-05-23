@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 {% block title %}
     Statistics
@@ -31,8 +31,7 @@
             <h2 class="accent-color">Most Used Ingredients</h2>
             <p class="lead fw-light">A visual snapshot of the ingredients you turn to most often in your culinary adventures.</p>
             <img src="data:image/png;base64,{{ ingredients_image_base64 }}"
-                 style="width:100%;
-                        height:auto"
+                 class="img-fluid"
                  alt="Most Used Ingredients">
         </div>
         <!-- Display Requests per Day of the Week -->
@@ -42,9 +41,8 @@
                 Ever wonder which days you're most likely to be bustling in the kitchen? A clear visual representation of when you're cooking the most.
             </p>
             <img src="data:image/png;base64,{{ daily_stats_image_base64 }}"
-                 style="width:100%;
-                        height:auto"
+                 class="img-fluid"
                  alt="Requests per Day of the Week">
         </div>
     </div>
-{% endblock %}
+{% endblock content %}

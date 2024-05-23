@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 {% block title %}
     Ingredient Management
@@ -11,7 +11,7 @@
     {% if last_activity_time %}<p>Last activity in the kitchen: {{ last_activity_time }}</p>{% endif %}
     <div class="card card-body mb-3">
         <h2 class="text-center">Kitchen</h2>
-        <form action="{% url 'kitchen:create' %}" method="POST">
+        <form action="{% url 'kitchen:create' %}" method="post">
             {% csrf_token %}
             <div class="mb-3">
                 <input type="text"
@@ -57,10 +57,10 @@
                             <div class="fs-6">({{ ingredient.quantity }} {{ ingredient.get_unit_display }})</div>
                         </div>
                         <div class="btn-group column-gap-3" role="group">
-                            <form action="{% url 'kitchen:edit' pk=ingredient.id %}" method="GET">
+                            <form action="{% url 'kitchen:edit' pk=ingredient.id %}" method="get">
                                 <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                             </form>
-                            <form action="{% url 'kitchen:delete' ingredient.id %}" method="POST">
+                            <form action="{% url 'kitchen:delete' ingredient.id %}" method="post">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>

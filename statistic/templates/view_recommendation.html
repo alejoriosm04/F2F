@@ -1,5 +1,7 @@
-{% extends 'base.html' %}
-{% block title %}Lifestyle Recommendation{% endblock %}
+{% extends "base.html" %}
+{% block title %}
+    Lifestyle Recommendation
+{% endblock title %}
 {% block content %}
     <div class="container mt-4">
         <h1 class="h1 pretty">Lifestyle Recommendation</h1>
@@ -25,4 +27,4 @@
         {% endif %}
         <a href="{% url 'statistics_overview' %}" class="btn btn-primary mt-3">Go Back to Dashboard</a>
     </div>
-{% endblock %}
+{% endblock content %}
