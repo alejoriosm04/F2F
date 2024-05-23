@@ -6,8 +6,9 @@ from .models import Recipe
 
 class OpenAIAdapter:
     from dotenv import load_dotenv
-    load_dotenv('.env')
-    api_key = os.getenv('OPENAI_API_KEY')
+
+    load_dotenv(".env")
+    api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 
     def generate_response_sync(self, ingredients, details, preference, portions):
@@ -32,11 +33,11 @@ class OpenAIAdapter:
     def _generate_response(self, instruction: str):
         messages = [
             {"role": "system", "content": instruction},
-            {"role": "user", "content": "Please create the recipe."}
+            {"role": "user", "content": "Please create the recipe."},
         ]
 
         response = OpenAIAdapter.client.chat.completions.create(
-            model='gpt-3.5-turbo',
+            model="gpt-3.5-turbo",
             max_tokens=500,
             temperature=0.5,
             messages=messages,
@@ -52,6 +53,7 @@ class OpenAIAdapter:
 
     def validate_recipe(self, api_response):
         import json
+
         try:
             recipe = json.loads(api_response)
         except json.JSONDecodeError:
@@ -60,14 +62,17 @@ class OpenAIAdapter:
         title = recipe["title"]
         steps = recipe["steps"]
 
-        return {'title': title, 'description': steps}
+        return {"title": title, "description": steps}
 
     def generate_image(self, recipe_id):
         recipe = Recipe.objects.get(id=recipe_id)
         import ast
-        recipe.description = ast.literal_eval(recipe.description) # Deserialize safely.
-        recipe_as_str = recipe.title + ' ' + ' '.join(recipe.description)
-        recipe_as_str = recipe_as_str[:1000]  # We can't send prompts longer than 1000 characters.
+
+        recipe.description = ast.literal_eval(recipe.description)  # Deserialize safely.
+        recipe_as_str = recipe.title + " " + " ".join(recipe.description)
+        recipe_as_str = recipe_as_str[
+            :1000
+        ]  # We can't send prompts longer than 1000 characters.
         prompt = "Generate a colourful image of this recipe: " + recipe_as_str
         response = OpenAIAdapter.client.images.generate(
             model="dall-e-2",

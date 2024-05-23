@@ -21,7 +21,9 @@ class Ingredient(models.Model):
     ]
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
     quantity = models.PositiveSmallIntegerField(default=1)
     unit = models.CharField(max_length=2, choices=UNIT_CHOICES, default="u")
 

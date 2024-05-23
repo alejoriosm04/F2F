@@ -20,11 +20,11 @@ from django.urls import path, include
 from kitchen import views as kitchen_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('home/', kitchen_views.index, name='home'),
-    path('', kitchen_views.main, name='main'),
-    path('kitchen/', include('kitchen.urls')),
-    path('user/', include('user.urls')),
-    path('kitchen/statistics/', include('statistic.urls')),
-    path('recipe/', include('recipe.urls')),
+    path("admin/", admin.site.urls),
+    path("home/", kitchen_views.index, name="home"),
+    path("", kitchen_views.main, name="main"),
+    path("kitchen/", include("kitchen.urls")),
+    path("user/", include("user.urls")),
+    path("kitchen/statistics/", include("statistic.urls")),
+    path("recipe/", include("recipe.urls")),
 ]

@@ -5,19 +5,32 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('kitchen', '0003_remove_ingredient_quantity_remove_ingredient_unit'),
-        ('recipe', '0001_initial'),
+        ("kitchen", "0003_remove_ingredient_quantity_remove_ingredient_unit"),
+        ("recipe", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='RecipeHadIngredient',
+            name="RecipeHadIngredient",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ingredient_name', models.CharField(max_length=100)),
-                ('recipe_id', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='recipe.recipe')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("ingredient_name", models.CharField(max_length=100)),
+                (
+                    "recipe_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        to="recipe.recipe",
+                    ),
+                ),
             ],
         ),
     ]
