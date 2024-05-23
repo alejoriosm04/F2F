@@ -1,67 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Generated recipe{% endblock title %}
-
+{% block title %}
+    Generated recipe
+{% endblock title %}
 {% block content %}
-{% if recipe is None %}
-<div class="alert alert-danger" role="alert">
-{{ error_message }}
-</div>
-{% else %}
-<h1 class="mt5 form-label">
-{{ recipe.title }}
-</h1>
-<ol class="form-label">
-{% for step in recipe.description %}
-<li>{{ step }}</li>
-{% endfor %}
-</ol>
-<div class="container mb-4 col-sm-5">
-<button id="get-image" class="button-85" data-id="{{ recipe.id }}">Generate image</button>
-<p class="form-label" id="loading" hidden>Loading, please wait…</p>
-<img id="image" hidden class="img-fluid" alt="AI-generated image of the recipe.">
-</div>
-<a type="button" class="btn btn-another-recipe text-decoration-none" href="{% url 'home' %}">Generate another recipe</a>
-<script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
-<script>
-const csrftoken = Cookies.get('csrftoken');
-document.addEventListener('DOMContentLoaded', (event) => {
-    const url = '{% url "recipe:get_image" %}';
-    var options = {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': csrftoken
-        },
-        mode: 'same-origin',
-    }
+    {% if recipe is None %}
+        <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+    {% else %}
+        <h1 class="mt5 form-label">{{ recipe.title }}</h1>
+        <ol class="form-label">
+            {% for step in recipe.description %}<li>{{ step }}</li>{% endfor %}
+        </ol>
+        <div class="container mb-4 col-sm-5">
+            <button id="get-image" class="button-85" data-id="{{ recipe.id }}">Generate image</button>
+            <p class="form-label" id="loading" hidden>Loading, please wait…</p>
+            <img id="image"
+                 hidden
+                 class="img-fluid"
+                 alt="AI-generated image of the recipe.">
+        </div>
+        <a type="button"
+           class="btn btn-another-recipe text-decoration-none"
+           href="{% url 'home' %}">Generate another recipe</a>
+        <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+        <script>
+        const csrftoken = Cookies.get('csrftoken');
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const url = '{% url "recipe:get_image" %}';
+            var options = {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken
+                },
+                mode: 'same-origin',
+            }
 
-    document.querySelector('button#get-image')
-        .addEventListener('click', function(e) {
-            e.preventDefault(); // Don't follow the hyperlink.
-            var getImageButton = this;
-            getImageButton.toggleAttribute("hidden");
-            var loadingMessage = document.querySelector('p#loading');
-            loadingMessage.toggleAttribute("hidden", false);
+            document.querySelector('button#get-image')
+                .addEventListener('click', function(e) {
+                    e.preventDefault(); // Don't follow the hyperlink.
+                    var getImageButton = this;
+                    getImageButton.toggleAttribute("hidden");
+                    var loadingMessage = document.querySelector('p#loading');
+                    loadingMessage.toggleAttribute("hidden", false);
 
-            // Request body.
-            var formData = new FormData();
-            formData.append('recipe_id', getImageButton.dataset.id);
-            options['body'] = formData;
+                    // Request body.
+                    var formData = new FormData();
+                    formData.append('recipe_id', getImageButton.dataset.id);
+                    options['body'] = formData;
 
-            fetch(url, options)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    if (data['image_url']) {
-                        var image = document.querySelector('img#image');
-                        image.setAttribute("src", data['image_url']);
-                        image.toggleAttribute("hidden");
-                        loadingMessage.toggleAttribute("hidden", true);
-                    }
+                    fetch(url, options)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            if (data['image_url']) {
+                                var image = document.querySelector('img#image');
+                                image.setAttribute("src", data['image_url']);
+                                image.toggleAttribute("hidden");
+                                loadingMessage.toggleAttribute("hidden", true);
+                            }
+                        });
                 });
-        });
-})
-</script>
-{% endif %}
-{% endblock content%}
+        })
+        </script>
+    {% endif %}
+{% endblock content %}

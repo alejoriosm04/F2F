@@ -1,130 +1,138 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <script>
+        /* Helper functions. */
+        const getStoredTheme = () => localStorage.getItem('theme');
+        const setStoredTheme = (theme) => localStorage.setItem('theme', theme);
 
-<head>
-  <script>
-    /* Helper functions. */
-    const getStoredTheme = () => localStorage.getItem('theme');
-    const setStoredTheme = (theme) => localStorage.setItem('theme', theme);
-
-    const switchColorsOnly = (theme) => {
-        setStoredTheme(theme);
-        document.documentElement.setAttribute('data-bs-theme', theme);
-    };
-    const switchIcon = (theme, icon) => {
-        icon.src = theme === 'dark' ? '{% static 'kitchen/icon/sun.png' %}' : '{% static 'kitchen/icon/moon.png' %}';
-    };
-
-    var initialTheme = getStoredTheme();
-    switchColorsOnly(initialTheme);  /* Before DOM loads. */
-
-    document.addEventListener('DOMContentLoaded', () => {
-        /* Update icon after DOM loads. */
-        var icon = document.getElementById('icon');
-        switchIcon(initialTheme, icon);
-
-        icon.onclick = function() {
-            theme = getStoredTheme() === 'dark' ? 'light': 'dark';
-            switchColorsOnly(theme);
-            switchIcon(theme, icon);
+        const switchColorsOnly = (theme) => {
+            setStoredTheme(theme);
+            document.documentElement.setAttribute('data-bs-theme', theme);
         };
-    });
-  </script>
-  <title>FridgeToFeast - {% block title %}{% endblock %}</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link href="{% static "kitchen/css/custom.css" %}" rel="stylesheet">
-  <link href="{% static "kitchen/css/buttons.css" %}" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Glory:wght@100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static "kitchen/favicon/apple-touch-icon.png" %}?v=2">
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static "kitchen/favicon/favicon-32x32.png" %}?v=2">
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static "kitchen/favicon/favicon-16x16.png" %}?v=2">
-  <link rel="manifest" href="{% static "kitchen/favicon/site.webmanifest" %}?v=2">
-  <link rel="mask-icon" href="{% static "kitchen/favicon/safari-pinned-tab.svg" %}?v=2" color="#812da9">
-  <link rel="shortcut icon" href="{% static "kitchen/favicon/favicon.ico" %}?v=2">
-  <meta name="apple-mobile-web-app-title" content="FridgeToFeast">
-  <meta name="application-name" content="FridgeToFeast">
-  <meta name="msapplication-TileColor" content="#812da9">
-  <meta name="msapplication-config" content="{% static "kitchen/favicon/browserconfig.xml" %}">
-  <meta name="theme-color" content="#812da9">
-  {% block styles %}{% endblock %}
-</head>
+        const switchIcon = (theme, icon) => {
+            icon.src = theme === 'dark' ? '{% static 'kitchen/icon/sun.png' %}' : '{% static 'kitchen/icon/moon.png' %}';
+        };
 
-<body>
-  <div id="header">
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">
-          <img src="{% static "kitchen/icon/isotype-100x100.png" %}" width="50" class="d-inline-block align-text-middle" alt="Logo">
-        </a>
-        {% if request.user.is_authenticated %}
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}">Generate Recipe</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'kitchen:list' %}">Edit kitchen</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'statistics_overview' %}">AI Analytics</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'recipe:history' %}">My recipes</a>
-            </li>
-          </ul>
-          <span class="navbar-text">
-            <form method="post" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
-            </form>
-          </span>
+        var initialTheme = getStoredTheme();
+        switchColorsOnly(initialTheme);  /* Before DOM loads. */
+
+        document.addEventListener('DOMContentLoaded', () => {
+            /* Update icon after DOM loads. */
+            var icon = document.getElementById('icon');
+            switchIcon(initialTheme, icon);
+
+            icon.onclick = function() {
+                theme = getStoredTheme() === 'dark' ? 'light': 'dark';
+                switchColorsOnly(theme);
+                switchIcon(theme, icon);
+            };
+        });
+        </script>
+        <title>FridgeToFeast -
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+              crossorigin="anonymous">
+        <link href="{% static "kitchen/css/custom.css" %}" rel="stylesheet">
+        <link href="{% static "kitchen/css/buttons.css" %}" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Glory:wght@100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+              rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static "kitchen/favicon/apple-touch-icon.png" %}?v=2">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static "kitchen/favicon/favicon-32x32.png" %}?v=2">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static "kitchen/favicon/favicon-16x16.png" %}?v=2">
+        <link rel="manifest" href="{% static "kitchen/favicon/site.webmanifest" %}?v=2">
+        <link rel="mask-icon" href="{% static "kitchen/favicon/safari-pinned-tab.svg" %}?v=2" color="#812da9">
+        <link rel="shortcut icon" href="{% static "kitchen/favicon/favicon.ico" %}?v=2">
+        <meta name="apple-mobile-web-app-title" content="FridgeToFeast">
+        <meta name="application-name" content="FridgeToFeast">
+        <meta name="msapplication-TileColor" content="#812da9">
+        <meta name="msapplication-config" content="{% static "kitchen/favicon/browserconfig.xml" %}">
+        <meta name="theme-color" content="#812da9">
+        {% block styles %}
+        {% endblock styles %}
+    </head>
+    <body>
+        <div id="header">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'home' %}">
+                        <img src="{% static "kitchen/icon/isotype-100x100.png" %}" width="50" class="d-inline-block align-text-middle" alt="Logo">
+                    </a>
+                    {% if request.user.is_authenticated %}
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'home' %}">Generate Recipe</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'kitchen:list' %}">Edit kitchen</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'statistics_overview' %}">AI Analytics</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'recipe:history' %}">My recipes</a>
+                                </li>
+                            </ul>
+                            <span class="navbar-text">
+                                <form method="post" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
+                                </form>
+                            </span>
+                        </div>
+                    {% endif %}
+                    <div class="d-inline-flex">
+                        {% if request.user.is_authenticated %}
+                            <button class="navbar-toggler"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#navbarText"
+                                    aria-controls="navbarText"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        {% endif %}
+                        <img class="ms-2" src="{% static "kitchen/icon/moon.png" %}"  alt="Darkmode" id="icon">
+                    </div>
+                </div>
+            </nav>
         </div>
-          {% endif %}
-        <div class="d-inline-flex">
-            {% if request.user.is_authenticated %}
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            {% endif %}
-            <img class="ms-2" src="{% static "kitchen/icon/moon.png" %}"  alt="Darkmode" id="icon">
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        {% block content %}
+                        {% endblock content %}
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </nav>
-  </div>
-
-  <div id="content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 offset-md-2">
-          {% block content %}
-          {% endblock %}
+        <div class="container">
+            <footer class="py-3 my-4 border-top">
+                <p class="fs-6 fw-light text-center">Powered by AI</p>
+                <p class="fs-6 fw-light text-center">© 2024 FTF Team</p>
+            </footer>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <footer class="py-3 my-4 border-top">
-      <p class="fs-6 fw-light text-center">Powered by AI</p>
-      <p class="fs-6 fw-light text-center">© 2024 FTF Team</p>
-    </footer>
-  </div>
-
-  <div id="notification-panel" style="display: none;">
-    <!-- Aquí se agregarán las notificaciones dinámicamente -->
-  </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  {% block scripts %}
-  {% endblock %}
-
-</body>
-
+        <div id="notification-panel" style="display: none;">
+            <!-- Aquí se agregarán las notificaciones dinámicamente -->
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous"></script>
+        {% block scripts %}
+        {% endblock scripts %}
+    </body>
 </html>

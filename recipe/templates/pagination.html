@@ -1,21 +1,19 @@
 {% if is_paginated %}
-<div class="container text-center">
-    <div class="row align-items-center">
-        <div class="col-4">
-            {% if page.has_previous %}
-            <a class="btn btn-primary" type="button" href="?page={{ page.previous_page_number }}">Previous</a>
-            {% endif %}
-        </div>
-        <div class="col-4">
-            <span class="current">
-                Page {{ page.number }} of {{ page.paginator.num_pages }}
-            </span>
-        </div>
-        <div class="col-4">
-            {% if page.has_next %}
-            <a class="btn btn-primary" href="?page={{ page.next_page_number }}">Next</a>
-            {% endif %}
+    <div class="container text-center">
+        <div class="row align-items-center">
+            <div class="col-4">
+                {% if page.has_previous %}
+                    <a class="btn btn-primary"
+                       type="button"
+                       href="?page={{ page.previous_page_number }}">Previous</a>
+                {% endif %}
+            </div>
+            <div class="col-4">
+                <span class="current">Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
+            </div>
+            <div class="col-4">
+                {% if page.has_next %}<a class="btn btn-primary" href="?page={{ page.next_page_number }}">Next</a>{% endif %}
+            </div>
         </div>
     </div>
-</div>
 {% endif %}

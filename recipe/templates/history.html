@@ -1,44 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}History{% endblock title %}
-
+{% block title %}
+    History
+{% endblock title %}
 {% block styles %}
 {% endblock styles %}
-
 {% block content %}
-<h1 class="h1 pretty">My recipes</h1>
-{% if page_obj %}
-<div class="container-fluid">
-    {% for recipe in object_list %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <h2 class="card-title fs-5">
-                <a class="history" href="{{ recipe.get_absolute_url }}">
-                    {{ recipe.title }}
-                </a>
-            </h2>
-            <h3 class="card-subtitle mb-2 text-body-secondary fs-6">
-                {{ recipe.cuisine }}, for {{ recipe.number_of_portions }}
-            </h3>
-            <h3 class="card-subtitle mb-2 text-body-secondary fs-6">
-                {{ recipe.generation_date|timesince}} ago
-            </h3>
-            <p class="card-text">
-            {{ recipe.short_description }} <span class="fw-light">…</span>
-            </p>
+    <h1 class="h1 pretty">My recipes</h1>
+    {% if page_obj %}
+        <div class="container-fluid">
+            {% for recipe in object_list %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h2 class="card-title fs-5">
+                            <a class="history" href="{{ recipe.get_absolute_url }}">{{ recipe.title }}</a>
+                        </h2>
+                        <h3 class="card-subtitle mb-2 text-body-secondary fs-6">{{ recipe.cuisine }}, for {{ recipe.number_of_portions }}</h3>
+                        <h3 class="card-subtitle mb-2 text-body-secondary fs-6">{{ recipe.generation_date|timesince }} ago</h3>
+                        <p class="card-text">
+                            {{ recipe.short_description }} <span class="fw-light">…</span>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    </div>
-    {% endfor %}
-</div>
-{% include "pagination.html" with page=page_obj %}
-{% else %}
-<div class="container text-center">
-    <div class="col">
-        <p class="fs-1 fw-bolder apply-mode">Oh noes!</p>
-        <p class="fs-1 apply-mode">You have no recipes 🥺</p>
-        <p class="fs-3 apply-mode"><a class="text-decoration-none" href="{% url "home" %}">Generate a few recipes</a> and come back later.</p>
-    </div>
-</div>
-{% endif %}
-{% endblock content%}
+        {% include "pagination.html" with page=page_obj %}
+    {% else %}
+        <div class="container text-center">
+            <div class="col">
+                <p class="fs-1 fw-bolder apply-mode">Oh noes!</p>
+                <p class="fs-1 apply-mode">You have no recipes 🥺</p>
+                <p class="fs-3 apply-mode">
+                    <a class="text-decoration-none" href="{% url "home" %}">Generate a few recipes</a> and come back later.
+                </p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}

@@ -1,43 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% load django_bootstrap5 %}
 {% block styles %}
-<link href="{% static "kitchen/css/reminder.css" %}" rel="stylesheet">
-<link href="{% static "kitchen/css/typewriter.css" %}" rel="stylesheet">
+    <link href="{% static "kitchen/css/reminder.css" %}" rel="stylesheet">
+    <link href="{% static "kitchen/css/typewriter.css" %}" rel="stylesheet">
 {% endblock %}
-
 {% block title %}Home{% endblock %}
-
 {% block content %}
-<h1 class="h1 pretty">FridgeToFeast</h1>
-<p class="lead">Make the most of your food.</p>
-<!-- Typewriter effect prompt -->
-<div class="typewriter">
-    <h2>What delicious dish can we help you cook today? Let's start</h2>
-</div>
-<br>
-<form method="post">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  <button type="submit" class="button-85" formaction="{% url 'recipe:generate_recipe' %}">Generate recipe</button>
-</form>
-
-{% if show_modal %}
-<div id="miModal" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p style="color: #1e2e2b;">Remember to update your kitchen, to cook the most delicious recipes with fresh ingredients.</p>
-    <!-- Button that takes the user to the kitchen page -->
-    <button onclick="window.location='{% url 'kitchen:list' %}';"  id="updateReminder" class="btn btn-primary">Go to kitchen</button>
-  </div>
-</div>
-{% endif %}
+    <h1 class="h1 pretty">FridgeToFeast</h1>
+    <p class="lead">Make the most of your food.</p>
+    <!-- Typewriter effect prompt -->
+    <div class="typewriter">
+        <h2>What delicious dish can we help you cook today? Let's start</h2>
+    </div>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit"
+                class="button-85"
+                formaction="{% url 'recipe:generate_recipe' %}">Generate recipe</button>
+    </form>
+    {% if show_modal %}
+        <div id="miModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p style="color: #1e2e2b;">
+                    Remember to update your kitchen, to cook the most delicious recipes with fresh ingredients.
+                </p>
+                <!-- Button that takes the user to the kitchen page -->
+                <button onclick="window.location='{% url 'kitchen:list' %}';"
+                        id="updateReminder"
+                        class="btn btn-primary">Go to kitchen</button>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
-
 {% block scripts %}
-{% if show_modal %}
-<script src="{% static 'kitchen/js/reminder.js' %}"></script>
-{% endif %}
+    {% if show_modal %}
+        <script src="{% static 'kitchen/js/reminder.js' %}"></script>
+    {% endif %}
 {% endblock %}
