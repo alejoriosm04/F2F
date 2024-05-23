@@ -96,9 +96,11 @@
         </div>
           {% endif %}
         <div class="d-inline-flex">
+            {% if request.user.is_authenticated %}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            {% endif %}
             <img class="ms-2" src="{% static "kitchen/icon/moon.png" %}"  alt="Darkmode" id="icon">
         </div>
       </div>
