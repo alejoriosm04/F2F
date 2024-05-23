@@ -31,5 +31,5 @@ class Ingredient(models.Model):
 
 
 class RecipeHadIngredient(models.Model):
-    recipe_id = models.ForeignKey(Recipe, on_delete=models.DO_NOTHING)
+    recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     ingredient_name = models.CharField(max_length=100)
