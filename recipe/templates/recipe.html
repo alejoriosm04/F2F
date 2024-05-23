@@ -52,8 +52,6 @@ document.querySelector('button#get-image')
 <li>{{ step }}</li>
 {% endfor %}
 </ol>
-<!-- Since we are just using around 100 tokens, the response might get cut off. -->
-<p class="fs-1 form-label">…</p>
 <div class="container mb-4 col-sm-5">
 <button id="get-image" class="button-85" data-id="{{ recipe.id }}">Generate image</button>
 <p class="form-label" id="loading" hidden>Loading, please wait…</p>
