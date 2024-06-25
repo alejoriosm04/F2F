@@ -1,4 +1,4 @@
-<h1 align="center">FridgeToFeast - FTF <img src="https://i.imgur.com/k9yCHbd.png" width="60"/> </h1>
+<h1 align="center">FridgeToFeast - FTF <img src=".github/images/isotype-ftf-cropped.png" width="60"/> </h1>
 
 **Make the most of your food - Powered by AI**
 
