@@ -14,18 +14,26 @@
 
 ## About Us
 
-**FridgeToFeast (FTF)** is a project for the fourth-semester course "Integrative Project II" (ST0251) taught at EAFIT University by professor Paola Vallejo, and developed by Alejandro Ríos, Danniela Zárate, Luis Torres, and Sara Cortes.
+**FridgeToFeast (FTF)** is a project for the fourth-semester course "Integrative
+Project II" (ST0251) taught at EAFIT University by professor Paola Vallejo, and
+developed by Alejandro Ríos, Danniela Zárate, Luis Torres, and Sara Cortes.
 
 ### What is FTF?
 
-FTF is an AI-based web application that analyzes kitchen ingredients to provide a variety of tailored recipes, promoting efficient and healthy meal planning.
+FTF is an AI-based web application that analyzes kitchen ingredients to provide
+a variety of tailored recipes, promoting efficient and healthy meal planning.
 
-- **Optimized Recipes:** Simply add everything stored in your kitchen, and through our AI system, we can generate optimized recipes based on certain specifications such as preferences, quantities, type of cooking, etc.
-- **Analytical Tools:** We also provide analytical tools to understand eating behavior.
+- **Optimized Recipes:** Simply add everything stored in your kitchen, and
+  through our AI system, we can generate optimized recipes based on certain
+  specifications such as preferences, quantities, type of cooking, etc.
+- **Analytical Tools:** We also provide analytical tools to understand eating
+  behavior.
 
 ### What do we solve?
 
-FTF addresses the challenge of deciding what to cook with the available ingredients, which can lead to unhealthy food choices and food waste. We seek to optimize our users' food for optimal use.
+FTF addresses the challenge of deciding what to cook with the available
+ingredients, which can lead to unhealthy food choices and food waste. We seek to
+optimize our users' food for optimal use.
 
 ### Why use FTF?
 
@@ -57,7 +65,8 @@ FTF addresses the challenge of deciding what to cook with the available ingredie
 
 8. Access `localhost:8000` from a modern web browser.
 
-For more detailed information about the project, please refer to the [wiki](https://github.com/alejoriosm04/F2F/wiki).
+For more detailed information about the project, please refer to the
+[wiki](https://github.com/alejoriosm04/F2F/wiki).
 
 ## Authors
 
@@ -67,4 +76,5 @@ For more detailed information about the project, please refer to the [wiki](http
 
 ## License
 
-Copyright (c) 2024, Alejandro Rios, Danniela Zárate, Luis Torres, Sara Cortes. All rights reserved FTF.
+Copyright (c) 2024, Alejandro Rios, Danniela Zárate, Luis Torres, Sara Cortes.
+All rights reserved FTF.
