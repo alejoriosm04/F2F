@@ -4,6 +4,7 @@
 
 ## Contents <!-- omit in toc -->
 
+- [Screenshots](#screenshots)
 - [About Us](#about-us)
   - [What is FTF?](#what-is-ftf)
   - [What do we solve?](#what-do-we-solve)
@@ -11,6 +12,33 @@
 - [Installation](#installation)
 - [Authors](#authors)
 - [License](#license)
+
+## Screenshots
+
+### Home screen <!-- omit in toc -->
+
+![Home screen in light mode.](.github/images/screenshots/01-home_light.png)
+![Home screen in dark mode.](.github/images/screenshots/01-home_dark.png)
+
+### Recipe screen <!-- omit in toc -->
+
+![Recipe screen.](.github/images/screenshots/02-recipe.png)
+
+### Kitchen screen <!-- omit in toc -->
+
+![Kitchen screen.](.github/images/screenshots/03-kitchen.png)
+
+### History screen <!-- omit in toc -->
+
+![History screen.](.github/images/screenshots/04-history.png)
+
+### AI-generated image of a recipe <!-- omit in toc -->
+
+![AI-generated image of a recipe.](.github/images/screenshots/05-ai_image.png)
+
+### Dashboard screen <!-- omit in toc -->
+
+![Dashboard screen.](.github/images/screenshots/06-dashboard.png)
 
 ## About Us
 
