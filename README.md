@@ -1,6 +1,6 @@
 <h1 align="center">FridgeToFeast - FTF <img src=".github/images/isotype-ftf-cropped.png" width="60"/> </h1>
 
-**Make the most of your food - Powered by AI**
+<p align="center"><i>Make the most of your food - Powered by AI</i></p>
 
 ## Contents <!-- omit in toc -->
 
