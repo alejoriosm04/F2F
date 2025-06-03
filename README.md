@@ -2,12 +2,12 @@
 
 **Make the most of your food - Powered by AI**
 
-## Contents
+## Contents <!-- omit in toc -->
 
 - [About Us](#about-us)
-   - [What is FTF?](#what-is-ftf)
-   - [What do we solve?](#what-do-we-solve)
-   - [Why use FTF?](#why-use-ftf)
+  - [What is FTF?](#what-is-ftf)
+  - [What do we solve?](#what-do-we-solve)
+  - [Why use FTF?](#why-use-ftf)
 - [Installation](#installation)
 - [Authors](#authors)
 - [License](#license)
